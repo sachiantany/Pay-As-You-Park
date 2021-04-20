@@ -1,6 +1,6 @@
 **2021-198**
 
-** Main objective**
+**Main objective**
 
 Provide an optimal parking solution based on subscription plan for users.
 
