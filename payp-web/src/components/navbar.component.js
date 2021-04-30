@@ -9,6 +9,9 @@ export default class Navbar extends Component {
         <Link to="/" className="navbar-brand">Pay as you Park</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav mr-auto">
+            <li className="navbar-item">
+                <Link to="/admin" className="nav-link">Admin</Link>
+            </li>
           <li className="navbar-item">
           <Link to="/signIn" className="nav-link">Sign in</Link>
           </li>

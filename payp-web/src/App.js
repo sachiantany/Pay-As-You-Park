@@ -9,20 +9,22 @@ import SignIn from "./components/login"
 import AboutApp from "./components/about-app"
 import Location from "./components/location"
 import AboutUs from "./components/about-us"
+import AdminHome from "./components/Admin/admin-home";
 
 
 function App() {
-  return (
-    <Router>
+  return(
+      <Router>
       <div className="container">
-      <Navbar />
-      <br/>
-      <Route path="/" exact component={Home} />
-      <Route path="/signIn" component={SignIn} />
-      <Route path="/aboutApp" component={AboutApp} />
-      <Route path="/location" component={Location} />
-      <Route path="/aboutUs" component={AboutUs} />
-      </div>
+        <Navbar />
+        <br/>
+        <Route path="/" exact component={Home} />
+    <Route path="/signIn" component={SignIn} />
+    <Route path="/aboutApp" component={AboutApp} />
+    <Route path="/location" component={Location} />
+    <Route path="/aboutUs" component={AboutUs} />
+        <Route path="/admin" component={AdminHome} />
+    </div>
     </Router>
   );
 }
