@@ -1,3 +1,7 @@
+/*
+This program used to generate reandom parking data
+*/
+
 import numpy as np
 import pandas as pd
 import random
