@@ -1,12 +1,9 @@
-/*
-This program used to generate reandom parking data
-*/
-
 import numpy as np
 import pandas as pd
 import random
-from datetime import datetime
+# from datetime import datetime
 import time
+import datetime
 
 PARKING_SLOT = {
     'P1': 120,
@@ -45,8 +42,11 @@ global START_DATE
 global END_DATE
 global TIME_BETWEEN_DATE
 global DAYS_BETWEEN_DATES
-START_DATE = '01-01-2020 00:00:00'
+START_DATE = '01-01-2021 00:00:00'
 END_DATE = '04-01-2021 00:00:00'
+
+UNIQUE_DATE_TIME  = datetime.datetime(2021, 1, 1, 12, 0, 0)
+UNIQUE_DATE_TIME_LIST = []
 
 
 
@@ -65,36 +65,51 @@ def generate_random_date(start, end):
 # range_value => to create the number of data
 # max_parking => the number of parking slots available in the given parking yard
 def generate_data(range_value, max_parking, parking):
+    global UNIQUE_DATE_TIME
+
     random_date_list = []
-    # breakpoint()
-    # for item in (0, range_value):
+
+
     for i in range(0, range_value):
         # random_number_of_days = random.randrange(DAYS_BETWEEN_DATES)
 
         # data
         occupied = random.randint(0, max_parking)
-        random_date = generate_random_date(START_DATE, END_DATE)
-        # random_date = START_DATE + datetime.timedelta(days=random_number_of_days)
 
-        random_date_list.append(random_date)
-        while random_date not in (random_date_list):
-            random_date = generate_random_date(START_DATE, END_DATE)
+        # ranges
+        random_adding_minutes = random.randint(29, 30)
+        random_adding_seconds = random.randint(0, 59)
 
-        to_return_data = {'parking_yard_id': parking, 'occcupancy': occupied, 'last_update': str(random_date)}
+        # date_and_time = datetime.datetime(2021, 1, 1, 12, 0, 0)
+        date_and_time = UNIQUE_DATE_TIME
+        time_change = datetime.timedelta(minutes=random_adding_minutes, seconds=random_adding_seconds)
+        random_date = date_and_time + time_change
+        random_date = random_date.strftime('%m/%d/%Y %H:%M:%S')
+        # UNIQUE_DATE_TIME = random_date
+
+        UNIQUE_DATE_TIME = datetime.datetime.strptime(random_date, '%m/%d/%Y %H:%M:%S')
+
+        to_return_data = {'parking_yard_id': parking, 'occcupancy': occupied, 'last_update': str(random_date), 'capacity': max_parking}
         yield to_return_data
-            
+    
+    UNIQUE_DATE_TIME  = datetime.datetime(2021, 1, 1, 12, 0, 0)
 
 
 to_csv_data = []
 for parking in PARKING_SLOT:
+    # global UNIQUE_DATE_TIME
     print(parking)
     # breakpoint()
 
-    data_set_values = random.randint(5000, 10000)
+    data_set_values = random.randint(1500, 2000)
 
     max_parking = PARKING_SLOT[parking]
 
     data_generator = generate_data(data_set_values, max_parking, parking)
+
+
+
+    # UNIQUE_DATE_TIME  = datetime.datetime(2021, 1, 1, 12, 0, 0)
 
     # breakpoint()
     for ss in data_generator:
