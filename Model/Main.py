@@ -9,33 +9,7 @@ PARKING_SLOT = {
     'P1': 120,
     'P2': 75,
     'P3': 100,
-    'P4': 225,
-    'P5': 300,
-    'P6': 250,
-    'P7': 450,
-    'P8': 150,
-    'P9': 300,
-    'P10': 450,
-    'P11': 800,
-    'P12': 780,
-    'P13': 600,
-    'P14': 400,
-    'P15': 445,
-    'P16': 667,
-    'P17': 289,
-    'P18': 380,
-    'P19': 560,
-    'P20': 180,
-    'P21': 300,
-    'P22': 400,
-    'P23': 280,
-    'P24': 740, 
-    'P25': 469, 
-    'P26': 385, 
-    'P27': 198, 
-    'P28': 228, 
-    'P29': 663, 
-    'P30': 445
+    'p4': 40
 }
 
 global START_DATE
@@ -101,7 +75,7 @@ for parking in PARKING_SLOT:
     print(parking)
     # breakpoint()
 
-    data_set_values = random.randint(1500, 2000)
+    data_set_values = random.randint(5, 10)
 
     max_parking = PARKING_SLOT[parking]
 
