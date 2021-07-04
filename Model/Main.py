@@ -269,7 +269,7 @@ def generate_data(range_value, max_parking, parking):
             # print(to_return_data)
         yield to_return_data
     
-    UNIQUE_DATE_TIME  = datetime.datetime(2021, 1, 1, 12, 0, 0)
+    UNIQUE_DATE_TIME  = datetime.datetime(2021, 1, 1, 0, 0, 0)
 
 
 to_csv_data = []
@@ -278,7 +278,7 @@ for parking in PARKING_SLOT:
     print(parking)
     # breakpoint()
 
-    data_set_values = random.randint(400, 500)
+    data_set_values = random.randint(2160, 2160)
 
     max_parking = PARKING_SLOT[parking]
 
@@ -297,4 +297,4 @@ for parking in PARKING_SLOT:
 
 # To dataframe
 final_Data_frame = pd.DataFrame(to_csv_data)
-final_Data_frame.to_csv('res.csv', index=False)
+final_Data_frame.to_csv('result.csv', index=False)
