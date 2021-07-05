@@ -16,14 +16,14 @@ tf.random.set_seed(2)
 batch_size = 32
 
 #Prepare input data
-classes = os.listdir('training_data')
+classes = os.listdir('training-data')
 num_classes = len(classes)
 
 # 20% of the data will automatically be used for validation
 validation_size = 0.2
 img_size = 128
 num_channels = 3
-train_path='training_data'
+train_path='training-data'
 
 # Training the dataset
 data = dataset.read_train_sets(train_path, img_size, classes, validation_size=validation_size)
@@ -193,7 +193,7 @@ def train(num_iteration):
             epoch = int(i / int(data.train.num_examples/batch_size))    
             
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
-            saver.save(session, './roadsurface-model') 
+            saver.save(session, './parkingsurface-model') 
 
 
     total_iterations += num_iteration
