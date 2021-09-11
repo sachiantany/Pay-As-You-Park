@@ -5,6 +5,8 @@ import random
 import time
 import datetime
 
+#generate random sample data based on parking history overview
+
 PARKING_SLOT = {
     'P1' : 120,
     'P2' : 75,
