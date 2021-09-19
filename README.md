@@ -6,7 +6,7 @@ A new Flutter project.
 
 Execute the following commands to start with project
 
-Step 1 :
+**Step 1 :**
     flutter pub get
-Step 2 :
+**Step 2 :**
     flutter packages pub run build_runner build --delete-conflicting-outputs
