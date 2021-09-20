@@ -15,18 +15,24 @@ import 'package:another_flushbar/flushbar_helper.dart';
 
 
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class DriverRegisterScreen extends StatefulWidget {
+  const DriverRegisterScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _DriverRegisterScreen createState() => _DriverRegisterScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _DriverRegisterScreen extends State<DriverRegisterScreen> {
 
   //text controllers:-----------------------------------------------------------
   TextEditingController _userEmailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+  TextEditingController _vehicleRegNoController = TextEditingController();
+  TextEditingController _widthController = TextEditingController();
+  TextEditingController _lengthController = TextEditingController();
+  TextEditingController _heightController = TextEditingController();
 
   //focus node:-----------------------------------------------------------------
   late FocusNode _passwordFocusNode;
@@ -107,13 +113,15 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AppIconWidget(image: 'assets/icons/ic_appicon.png'),
-            SizedBox(height: 24.0),
+            _buildFirstNameField(),
+            _buildLastNameField(),
             _buildUserIdField(),
+            _buildRegistrationNumberField(),
+            _buildWidthField(),
+            _buildLengthField(),
+            _buildHeightField(),
             _buildPasswordField(),
-            _buildForgotPasswordButton(),
-            _buildSignInButton(),
-            _buildRegisterButton()
+            _buildSignUpButton()
           ],
         ),
       ),
@@ -143,6 +151,144 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _buildFirstNameField() {
+    return Observer(
+      builder: (context) {
+        return TextFieldWidget(
+          hint: 'First Name',
+          inputType: TextInputType.text,
+          icon: Icons.event_note_sharp,
+          iconColor: Colors.black54,
+          textController: _firstNameController,
+          inputAction: TextInputAction.next,
+          autoFocus: false,
+          onChanged: (value) {
+            _store.setFisrtName(_firstNameController.text);
+          },
+          onFieldSubmitted: (value) {
+            FocusScope.of(context).requestFocus(_passwordFocusNode);
+          },
+          errorText: _store.formErrorStore.fisrtName,
+        );
+      },
+    );
+  }
+
+  Widget _buildLastNameField() {
+    return Observer(
+      builder: (context) {
+        return TextFieldWidget(
+          hint: 'Last Name',
+          inputType: TextInputType.text,
+          icon: Icons.event_note_sharp,
+          iconColor: Colors.black54,
+          textController: _lastNameController,
+          inputAction: TextInputAction.next,
+          autoFocus: false,
+          onChanged: (value) {
+            _store.setLastName(_lastNameController.text);
+          },
+          onFieldSubmitted: (value) {
+            FocusScope.of(context).requestFocus(_passwordFocusNode);
+          },
+          errorText: _store.formErrorStore.lastName,
+        );
+      },
+    );
+  }
+
+  Widget _buildRegistrationNumberField() {
+    return Observer(
+      builder: (context) {
+        return TextFieldWidget(
+          hint: 'Vehicle Reg No',
+          inputType: TextInputType.text,
+          icon: Icons.event_note_sharp,
+          iconColor: Colors.black54,
+          textController: _vehicleRegNoController,
+          inputAction: TextInputAction.next,
+          autoFocus: false,
+          onChanged: (value) {
+            _store.setvehicleRegNo(_vehicleRegNoController.text);
+          },
+          onFieldSubmitted: (value) {
+            FocusScope.of(context).requestFocus(_passwordFocusNode);
+          },
+          errorText: _store.formErrorStore.vehicleRegistrationNumber,
+        );
+      },
+    );
+  }
+
+  Widget _buildWidthField() {
+    return Observer(
+      builder: (context) {
+        return TextFieldWidget(
+          hint: 'Vehicle Width',
+          inputType: TextInputType.text,
+          icon: Icons.event_note_sharp,
+          iconColor: Colors.black54,
+          textController: _widthController,
+          inputAction: TextInputAction.next,
+          autoFocus: false,
+          onChanged: (value) {
+            _store.setWidth(_widthController.text);
+          },
+          onFieldSubmitted: (value) {
+            FocusScope.of(context).requestFocus(_passwordFocusNode);
+          },
+          errorText: _store.formErrorStore.vehicleWidth,
+        );
+      },
+    );
+  }
+
+  Widget _buildLengthField() {
+    return Observer(
+      builder: (context) {
+        return TextFieldWidget(
+          hint: 'Vehicle Length',
+          inputType: TextInputType.text,
+          icon: Icons.event_note_sharp,
+          iconColor: Colors.black54,
+          textController: _lengthController,
+          inputAction: TextInputAction.next,
+          autoFocus: false,
+          onChanged: (value) {
+            _store.setLength(_lengthController.text);
+          },
+          onFieldSubmitted: (value) {
+            FocusScope.of(context).requestFocus(_passwordFocusNode);
+          },
+          errorText: _store.formErrorStore.vehicleLength,
+        );
+      },
+    );
+  }
+
+  Widget _buildHeightField() {
+    return Observer(
+      builder: (context) {
+        return TextFieldWidget(
+          hint: 'Vehicle Height',
+          inputType: TextInputType.text,
+          icon: Icons.event_note_sharp,
+          iconColor: Colors.black54,
+          textController: _heightController,
+          inputAction: TextInputAction.next,
+          autoFocus: false,
+          onChanged: (value) {
+            _store.setHeight(_heightController.text);
+          },
+          onFieldSubmitted: (value) {
+            FocusScope.of(context).requestFocus(_passwordFocusNode);
+          },
+          errorText: _store.formErrorStore.vehicleHeight,
+        );
+      },
+    );
+  }
+
   Widget _buildPasswordField() {
     return Observer(
       builder: (context) {
@@ -163,24 +309,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildForgotPasswordButton() {
-    return Align(
-      alignment: FractionalOffset.centerRight,
-      child: FlatButton(
-        padding: EdgeInsets.all(0.0),
-        child: Text(
-          'Forgot Password',
-          style: Theme.of(context)
-              .textTheme
-              .caption
-              ?.copyWith(color: Colors.orangeAccent),
-        ),
-        onPressed: () {},
-      ),
-    );
-  }
-
-  Widget _buildSignInButton() {
+  Widget _buildSignUpButton() {
     return RoundedButtonWidget(
       buttonText: 'Sign In',
       buttonColor: Colors.orangeAccent,
@@ -188,21 +317,10 @@ class _LoginScreenState extends State<LoginScreen> {
       onPressed: () async {
         if (_store.canLogin) {
           DeviceUtils.hideKeyboard(context);
-          _store.login();
+          _store.registerDriver();
         } else {
           _showErrorMessage('Please fill in all fields');
         }
-      },
-    );
-  }
-
-  Widget _buildRegisterButton() {
-    return RoundedButtonWidget(
-      buttonText: 'Register',
-      buttonColor: Colors.green,
-      textColor: Colors.white,
-      onPressed: () {
-        Navigator.of(context).pushReplacementNamed(Routes.register);
       },
     );
   }

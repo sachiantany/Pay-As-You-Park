@@ -40,6 +40,24 @@ abstract class _DriverStore with Store {
   String confirmPassword = '';
 
   @observable
+  String firstName = '';
+
+  @observable
+  String lastName = '';
+
+  @observable
+  String vehicleRegistrationNumber = '';
+
+  @observable
+  String vehicleWidth = '';
+
+  @observable
+  String vehicleLength = '';
+
+  @observable
+  String vehicleHeight = '';
+
+  @observable
   String token = '';
 
   @observable
@@ -67,6 +85,34 @@ abstract class _DriverStore with Store {
   @action
   void setUserId(String value) {
     userEmail = value;
+  }
+  @action
+  void setFisrtName(String value) {
+    firstName = value;
+  }
+  @action
+  void setLastName(String value) {
+    lastName = value;
+  }
+
+  @action
+  void setvehicleRegNo(String value) {
+    vehicleRegistrationNumber = value;
+  }
+
+  @action
+  void setWidth(String value) {
+    vehicleWidth = value;
+  }
+
+  @action
+  void setLength(String value) {
+    vehicleLength = value;
+  }
+
+  @action
+  void setHeight(String value) {
+    vehicleHeight = value;
   }
 
   @action
@@ -121,8 +167,36 @@ abstract class _DriverStore with Store {
   Future login() async {
     loading = true;
     DriverService().login(userEmail, password).then((val){
+      if(val.data['result'] != null){
+        loading = false;
+        success = true;
+      }else{
+        loading = false;
+        success = false;
+        errorStore.errorMessage = val.data['message'];
+      }
+    }).catchError((e) {
       loading = false;
-      success = true;
+      success = false;
+      errorStore.errorMessage = e.toString().contains("ERROR_USER_NOT_FOUND")
+          ? "Username and password doesn't match"
+          : "Something went wrong, please check your internet connection and try again";
+      print(e);
+    });
+  }
+
+  @action
+  Future registerDriver() async {
+    loading = true;
+    DriverService().registerDriver(firstName,lastName,userEmail, password,vehicleRegistrationNumber,vehicleWidth,vehicleLength,vehicleHeight).then((val){
+      if(val.data['result'] != null){
+        loading = false;
+        success = true;
+      }else{
+        loading = false;
+        success = false;
+        errorStore.errorMessage = val.data['message'];
+      }
     }).catchError((e) {
       loading = false;
       success = false;
@@ -167,6 +241,24 @@ abstract class _FormErrorStore with Store {
 
   @observable
   String? confirmPassword;
+
+  @observable
+  String? fisrtName;
+
+  @observable
+  String? lastName;
+
+  @observable
+  String vehicleRegistrationNumber = '';
+
+  @observable
+  String vehicleWidth = '';
+
+  @observable
+  String vehicleLength = '';
+
+  @observable
+  String vehicleHeight = '';
 
   @computed
   bool get hasErrorsInLogin => userEmail != null || password != null;

@@ -75,6 +75,113 @@ mixin _$DriverStore on _DriverStore, Store {
     });
   }
 
+  final _$firstNameAtom = Atom(name: '_DriverStore.firstName');
+
+  @override
+  String get firstName {
+    _$firstNameAtom.reportRead();
+    return super.firstName;
+  }
+
+  @override
+  set firstName(String value) {
+    _$firstNameAtom.reportWrite(value, super.firstName, () {
+      super.firstName = value;
+    });
+  }
+
+  final _$lastNameAtom = Atom(name: '_DriverStore.lastName');
+
+  @override
+  String get lastName {
+    _$lastNameAtom.reportRead();
+    return super.lastName;
+  }
+
+  @override
+  set lastName(String value) {
+    _$lastNameAtom.reportWrite(value, super.lastName, () {
+      super.lastName = value;
+    });
+  }
+
+  final _$vehicleRegistrationNumberAtom =
+      Atom(name: '_DriverStore.vehicleRegistrationNumber');
+
+  @override
+  String get vehicleRegistrationNumber {
+    _$vehicleRegistrationNumberAtom.reportRead();
+    return super.vehicleRegistrationNumber;
+  }
+
+  @override
+  set vehicleRegistrationNumber(String value) {
+    _$vehicleRegistrationNumberAtom
+        .reportWrite(value, super.vehicleRegistrationNumber, () {
+      super.vehicleRegistrationNumber = value;
+    });
+  }
+
+  final _$vehicleWidthAtom = Atom(name: '_DriverStore.vehicleWidth');
+
+  @override
+  String get vehicleWidth {
+    _$vehicleWidthAtom.reportRead();
+    return super.vehicleWidth;
+  }
+
+  @override
+  set vehicleWidth(String value) {
+    _$vehicleWidthAtom.reportWrite(value, super.vehicleWidth, () {
+      super.vehicleWidth = value;
+    });
+  }
+
+  final _$vehicleLengthAtom = Atom(name: '_DriverStore.vehicleLength');
+
+  @override
+  String get vehicleLength {
+    _$vehicleLengthAtom.reportRead();
+    return super.vehicleLength;
+  }
+
+  @override
+  set vehicleLength(String value) {
+    _$vehicleLengthAtom.reportWrite(value, super.vehicleLength, () {
+      super.vehicleLength = value;
+    });
+  }
+
+  final _$vehicleHeightAtom = Atom(name: '_DriverStore.vehicleHeight');
+
+  @override
+  String get vehicleHeight {
+    _$vehicleHeightAtom.reportRead();
+    return super.vehicleHeight;
+  }
+
+  @override
+  set vehicleHeight(String value) {
+    _$vehicleHeightAtom.reportWrite(value, super.vehicleHeight, () {
+      super.vehicleHeight = value;
+    });
+  }
+
+  final _$tokenAtom = Atom(name: '_DriverStore.token');
+
+  @override
+  String get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
   final _$successAtom = Atom(name: '_DriverStore.success');
 
   @override
@@ -119,6 +226,14 @@ mixin _$DriverStore on _DriverStore, Store {
     return _$loginAsyncAction.run(() => super.login());
   }
 
+  final _$registerDriverAsyncAction =
+      AsyncAction('_DriverStore.registerDriver');
+
+  @override
+  Future<dynamic> registerDriver() {
+    return _$registerDriverAsyncAction.run(() => super.registerDriver());
+  }
+
   final _$forgotPasswordAsyncAction =
       AsyncAction('_DriverStore.forgotPassword');
 
@@ -142,6 +257,72 @@ mixin _$DriverStore on _DriverStore, Store {
         name: '_DriverStore.setUserId');
     try {
       return super.setUserId(value);
+    } finally {
+      _$_DriverStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setFisrtName(String value) {
+    final _$actionInfo = _$_DriverStoreActionController.startAction(
+        name: '_DriverStore.setFisrtName');
+    try {
+      return super.setFisrtName(value);
+    } finally {
+      _$_DriverStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLastName(String value) {
+    final _$actionInfo = _$_DriverStoreActionController.startAction(
+        name: '_DriverStore.setLastName');
+    try {
+      return super.setLastName(value);
+    } finally {
+      _$_DriverStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setvehicleRegNo(String value) {
+    final _$actionInfo = _$_DriverStoreActionController.startAction(
+        name: '_DriverStore.setvehicleRegNo');
+    try {
+      return super.setvehicleRegNo(value);
+    } finally {
+      _$_DriverStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setWidth(String value) {
+    final _$actionInfo = _$_DriverStoreActionController.startAction(
+        name: '_DriverStore.setWidth');
+    try {
+      return super.setWidth(value);
+    } finally {
+      _$_DriverStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLength(String value) {
+    final _$actionInfo = _$_DriverStoreActionController.startAction(
+        name: '_DriverStore.setLength');
+    try {
+      return super.setLength(value);
+    } finally {
+      _$_DriverStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setHeight(String value) {
+    final _$actionInfo = _$_DriverStoreActionController.startAction(
+        name: '_DriverStore.setHeight');
+    try {
+      return super.setHeight(value);
     } finally {
       _$_DriverStoreActionController.endAction(_$actionInfo);
     }
@@ -208,6 +389,13 @@ mixin _$DriverStore on _DriverStore, Store {
 userEmail: ${userEmail},
 password: ${password},
 confirmPassword: ${confirmPassword},
+firstName: ${firstName},
+lastName: ${lastName},
+vehicleRegistrationNumber: ${vehicleRegistrationNumber},
+vehicleWidth: ${vehicleWidth},
+vehicleLength: ${vehicleLength},
+vehicleHeight: ${vehicleHeight},
+token: ${token},
 success: ${success},
 loading: ${loading},
 canLogin: ${canLogin},
@@ -285,12 +473,110 @@ mixin _$FormErrorStore on _FormErrorStore, Store {
     });
   }
 
+  final _$fisrtNameAtom = Atom(name: '_FormErrorStore.fisrtName');
+
+  @override
+  String? get fisrtName {
+    _$fisrtNameAtom.reportRead();
+    return super.fisrtName;
+  }
+
+  @override
+  set fisrtName(String? value) {
+    _$fisrtNameAtom.reportWrite(value, super.fisrtName, () {
+      super.fisrtName = value;
+    });
+  }
+
+  final _$lastNameAtom = Atom(name: '_FormErrorStore.lastName');
+
+  @override
+  String? get lastName {
+    _$lastNameAtom.reportRead();
+    return super.lastName;
+  }
+
+  @override
+  set lastName(String? value) {
+    _$lastNameAtom.reportWrite(value, super.lastName, () {
+      super.lastName = value;
+    });
+  }
+
+  final _$vehicleRegistrationNumberAtom =
+      Atom(name: '_FormErrorStore.vehicleRegistrationNumber');
+
+  @override
+  String get vehicleRegistrationNumber {
+    _$vehicleRegistrationNumberAtom.reportRead();
+    return super.vehicleRegistrationNumber;
+  }
+
+  @override
+  set vehicleRegistrationNumber(String value) {
+    _$vehicleRegistrationNumberAtom
+        .reportWrite(value, super.vehicleRegistrationNumber, () {
+      super.vehicleRegistrationNumber = value;
+    });
+  }
+
+  final _$vehicleWidthAtom = Atom(name: '_FormErrorStore.vehicleWidth');
+
+  @override
+  String get vehicleWidth {
+    _$vehicleWidthAtom.reportRead();
+    return super.vehicleWidth;
+  }
+
+  @override
+  set vehicleWidth(String value) {
+    _$vehicleWidthAtom.reportWrite(value, super.vehicleWidth, () {
+      super.vehicleWidth = value;
+    });
+  }
+
+  final _$vehicleLengthAtom = Atom(name: '_FormErrorStore.vehicleLength');
+
+  @override
+  String get vehicleLength {
+    _$vehicleLengthAtom.reportRead();
+    return super.vehicleLength;
+  }
+
+  @override
+  set vehicleLength(String value) {
+    _$vehicleLengthAtom.reportWrite(value, super.vehicleLength, () {
+      super.vehicleLength = value;
+    });
+  }
+
+  final _$vehicleHeightAtom = Atom(name: '_FormErrorStore.vehicleHeight');
+
+  @override
+  String get vehicleHeight {
+    _$vehicleHeightAtom.reportRead();
+    return super.vehicleHeight;
+  }
+
+  @override
+  set vehicleHeight(String value) {
+    _$vehicleHeightAtom.reportWrite(value, super.vehicleHeight, () {
+      super.vehicleHeight = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 userEmail: ${userEmail},
 password: ${password},
 confirmPassword: ${confirmPassword},
+fisrtName: ${fisrtName},
+lastName: ${lastName},
+vehicleRegistrationNumber: ${vehicleRegistrationNumber},
+vehicleWidth: ${vehicleWidth},
+vehicleLength: ${vehicleLength},
+vehicleHeight: ${vehicleHeight},
 hasErrorsInLogin: ${hasErrorsInLogin},
 hasErrorsInRegister: ${hasErrorsInRegister},
 hasErrorInForgotPassword: ${hasErrorInForgotPassword}
