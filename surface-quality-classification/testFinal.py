@@ -138,12 +138,12 @@ while cv.waitKey(1) < 0:
         outputsQ = [resultAQ[0,0], resultAQ[0,1], resultAQ[0,2]]
         valueQ = max(outputsQ)
         indexQ = np.argmax(outputsQ)
-        if indexQ == 0: #Asphalt - Good
-            quality = 'Good'
+        if indexQ == 0: #Asphalt - Standard
+            quality = 'Standard'
             colorQ = (0, 255, 0)
             probQ =  str("{0:.2f}".format(valueQ))
-        elif indexQ == 1: #Asphalt - Regular
-            quality = 'Regular'
+        elif indexQ == 1: #Asphalt - Average
+            quality = 'Average'
             colorQ = (0, 204, 255)
             probQ =  str("{0:.2f}".format(valueQ))
         elif indexQ == 2: #Asphalt - Bad
@@ -163,12 +163,12 @@ while cv.waitKey(1) < 0:
         outputsQ = [resultPQ[0,0], resultPQ[0,1], resultPQ[0,2]]
         valueQ = max(outputsQ)
         indexQ = np.argmax(outputsQ)
-        if indexQ == 0: #Paved - Good
-            quality = 'Good'
+        if indexQ == 0: #Paved - Standard
+            quality = 'Standard'
             colorQ = (0, 255, 0)
             probQ =  str("{0:.2f}".format(valueQ))
-        elif indexQ == 1: #Paved - Regular
-            quality = 'Regular'
+        elif indexQ == 1: #Paved - Average
+            quality = 'Average'
             colorQ = (0, 204, 255)
             probQ =  str("{0:.2f}".format(valueQ))
         elif indexQ == 2: #Paved - Bad
@@ -188,8 +188,8 @@ while cv.waitKey(1) < 0:
         outputsQ = [resultUQ[0,0], resultUQ[0,1]]
         valueQ = max(outputsQ)
         indexQ = np.argmax(outputsQ)
-        if indexQ == 0: #Unpaved - Regular
-            quality = 'Regular'
+        if indexQ == 0: #Unpaved - Average
+            quality = 'Average'
             colorQ = (0, 204, 255)
             probQ =  str("{0:.2f}".format(valueQ))
         elif indexQ == 1: #Unpaved - Bad
@@ -197,13 +197,13 @@ while cv.waitKey(1) < 0:
             colorQ = (0, 0, 255)
             probQ =  str("{0:.2f}".format(valueQ))
 
-    cv.rectangle(finalimg, (145, 80), (0, 0), (255, 255, 255), cv.FILLED)
-    cv.putText(finalimg, 'Class: ', (5,15), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
-    cv.putText(finalimg, label, (70,15), cv.FONT_HERSHEY_DUPLEX, 0.5, color)
-    cv.putText(finalimg, prob, (5,35), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
-    cv.putText(finalimg, 'Quality: ', (5,55), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
-    cv.putText(finalimg, quality, (70,55), cv.FONT_HERSHEY_DUPLEX, 0.5, colorQ)
-    cv.putText(finalimg, probQ, (5,75), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
+    cv.rectangle(finalimg, (240, 90), (10,10), (255, 255, 255), cv.FILLED)
+    cv.putText(finalimg, 'Surface Type: ', (15,30), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
+    cv.putText(finalimg, label, (150,30), cv.FONT_HERSHEY_DUPLEX, 0.5, color)
+    #cv.putText(finalimg, prob, (5,35), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
+    cv.putText(finalimg, 'Surface Quality: ', (15,60), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
+    cv.putText(finalimg, quality, (150,60), cv.FONT_HERSHEY_DUPLEX, 0.5, colorQ)
+    #cv.putText(finalimg, probQ, (5,75), cv.FONT_HERSHEY_DUPLEX, 0.5, (0,0,0))
 
     vid_writer.write(finalimg.astype(np.uint8))
 
