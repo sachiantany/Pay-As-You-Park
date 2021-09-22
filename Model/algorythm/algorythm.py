@@ -1,6 +1,9 @@
 from DBConnection import get_database
 from pandas import DataFrame
 from Haversine import dist
+import datetime
+import googlemaps
+import pickle
 
 def find_nearest(lat, long):
     distances = available_yards_df.apply(
@@ -42,16 +45,43 @@ available_yards_df = items_df.loc[(items_df.Capacity > items_df.Occupancy) & (it
 print(available_yards_df)
 
 found_yard = False
+sugest_yard_id = ''
 yard_id = ''
 latitude = ''
 longitude = ''
+API_key = '' #enter Google Maps API key
+gmaps = googlemaps.Client(key=API_key)
+
+model = pickle.load(open('model.pkl','rb'))
 
 while found_yard == False:
     yard_id = find_nearest(user_lat,user_lon)
     latitude = available_yards_df.loc[available_yards_df['PID'] == yard_id].Latitude
     longitude = available_yards_df.loc[available_yards_df['PID'] == yard_id].Longitude
-    print(latitude)
-    print(longitude)
+
+    origins = (user_lon,user_lat)
+    destination = (longitude,latitude)
+
+    #print(latitude)
+    #print(longitude)
+
+    #result = gmaps.distance_matrix(origins, destination, mode='driving')["rows"][0]["elements"][0]["duration"]["value"]
+    result = 1331
+
+    # datetime object containing current date and time
+    now = datetime.datetime.now()
+    reach_time = now + datetime.timedelta(seconds=result)
+    print(reach_time)
+
+    occupancy = model.predict(start=reach_time, end=reach_time)
+
+    print(occupancy)
+
+    if occupancy < 100:
+        found_yard = True
+
+    #for now
     found_yard = True
+    
 
 
