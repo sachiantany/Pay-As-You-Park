@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_as_you_park/model/directions_model.dart';
+import 'package:pay_as_you_park/services/directions_repository.dart';
 import 'package:pay_as_you_park/utils/routes/routes.dart';
 import 'dart:async';
 import 'dart:typed_data';
@@ -20,8 +22,16 @@ class _HomeScreenState extends State<HomeScreen> {
   late Marker marker;
   late Circle circle;
   late GoogleMapController _controller;
+  late Marker _destination;
+  late double destinationLat;
+  late double destinationLon;
+  late String parkingYardId;
+  late Directions _info;
+
+
 
   bool marker_active = false;
+  bool destination_active = false;
 
   static final CameraPosition initialLocation = CameraPosition(
     target: LatLng(6.0535, 80.2210),
@@ -92,21 +102,58 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     if (_locationSubscription != null) {
       _locationSubscription.cancel();
+      _controller.dispose();
+
     }
     super.dispose();
+  }
+
+  void getDestination() async {
+    getCurrentLocation();
+    destinationLat = 6.9271;
+    destinationLon = 79.8612;
+
+    LatLng latlng = LatLng(destinationLat,destinationLon);
+    this.setState(() {
+      _destination = Marker(
+          markerId: MarkerId("destination"),
+          position: latlng,
+          draggable: false,
+          zIndex: 2,
+          flat: true,
+          anchor: Offset(0.5, 0.5),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue));
+    });
+
+    final directions = await DirectionsRepository()
+        .getDirections(origin: marker.position, destination: latlng);
+    setState(() => _info = directions!);
+
+    destination_active = true;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Stack(children: <Widget>[
+      body: Stack(alignment: Alignment.center,children: <Widget>[
         GoogleMap(
         mapToolbarEnabled: true,
         mapType: MapType.normal,
         initialCameraPosition: initialLocation,
         markers: Set.of((marker_active != false) ? [marker] : []),
         circles: Set.of((marker_active != false) ? [circle] : []),
+          polylines: {
+            if (destination_active != false)
+              Polyline(
+                polylineId: const PolylineId('overview_polyline'),
+                color: Colors.red,
+                width: 5,
+                points: _info.polylinePoints
+                    .map((e) => LatLng(e.latitude, e.longitude))
+                    .toList(),
+              ),
+          },
         onMapCreated: (GoogleMapController controller) {
           _controller = controller;
         },
@@ -129,8 +176,37 @@ class _HomeScreenState extends State<HomeScreen> {
               heroTag: 2,
               onPressed: () {
                 //getCurrentLocation();
+                getDestination();
               },
             )),
+        if (destination_active != false)
+          Positioned(
+            top: 20.0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 6.0,
+                horizontal: 12.0,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.yellowAccent,
+                borderRadius: BorderRadius.circular(20.0),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    offset: Offset(0, 2),
+                    blurRadius: 6.0,
+                  )
+                ],
+              ),
+              child: Text(
+                '${_info.totalDistance}, ${_info.totalDuration}',
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
       ]),
     );
   }
