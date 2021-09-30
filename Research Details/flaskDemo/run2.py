@@ -47,4 +47,4 @@ def home():
     return render_template('index.html', prediction=prediction)
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=False)
+    app.run(debug=False, threaded=False)
