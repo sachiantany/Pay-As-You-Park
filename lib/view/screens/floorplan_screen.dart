@@ -1,10 +1,10 @@
-import 'package:pay_as_you_park/core/viewmodels/floorplan_model.dart';
-import 'package:pay_as_you_park/view/shared/global.dart';
-import 'package:pay_as_you_park/view/widgets/appbar_widget.dart';
-import 'package:pay_as_you_park/view/widgets/gridview_widget.dart';
-import 'package:pay_as_you_park/view/widgets/overlay_widget.dart';
-import 'package:pay_as_you_park/view/widgets/raw_gesture_detector_widget.dart';
-import 'package:pay_as_you_park/view/widgets/reset_button_widget.dart';
+import 'package:custom_zoomable_floorplan/core/viewmodels/floorplan_model.dart';
+import 'package:custom_zoomable_floorplan/view/shared/global.dart';
+import 'package:custom_zoomable_floorplan/view/widgets/appbar_widget.dart';
+import 'package:custom_zoomable_floorplan/view/widgets/gridview_widget.dart';
+import 'package:custom_zoomable_floorplan/view/widgets/overlay_widget.dart';
+import 'package:custom_zoomable_floorplan/view/widgets/raw_gesture_detector_widget.dart';
+import 'package:custom_zoomable_floorplan/view/widgets/reset_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +25,7 @@ class FloorPlanScreen extends StatelessWidget {
           topRight: Radius.circular(40),
         ),
         child: Container(
-          color: Colors.black,
+          color: Color(0xff02011c), //02011c
           child: Center(
             child: Stack(
               alignment: Alignment.center,

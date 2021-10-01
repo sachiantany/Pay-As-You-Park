@@ -1,5 +1,5 @@
-import 'package:pay_as_you_park/core/viewmodels/floorplan_model.dart';
-import 'package:pay_as_you_park/view/shared/global.dart';
+import 'package:custom_zoomable_floorplan/core/viewmodels/floorplan_model.dart';
+import 'package:custom_zoomable_floorplan/view/shared/global.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +76,7 @@ class RawGestureDetectorWidget extends StatelessWidget {
     return RawGestureDetector(
       gestures: _gestures,
       child: Container(
-        color: Colors.black,
+        color: Color(0xff02011c),
         child: Transform(
           alignment: _alignment,
           transform: _transform,

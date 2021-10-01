@@ -1,5 +1,5 @@
-import 'package:pay_as_you_park/core/models/models.dart';
-import 'package:pay_as_you_park/view/shared/global.dart';
+import 'package:custom_zoomable_floorplan/core/models/models.dart';
+import 'package:custom_zoomable_floorplan/view/shared/global.dart';
 import 'package:flutter/cupertino.dart';
 
 class Pos {
@@ -34,9 +34,9 @@ class FloorPlanModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // List<Light> _lights =
-  //     Global.lights.map((item) => Light.fromMap(item)).toList();
-  // List<Light> get lights => _lights;
+  List<Light> _lights =
+      Global.lights.map((item) => Light.fromMap(item)).toList();
+  List<Light> get lights => _lights;
 
   void handleDragScaleStart(ScaleStartDetails details) {
     _hasTouched = true;

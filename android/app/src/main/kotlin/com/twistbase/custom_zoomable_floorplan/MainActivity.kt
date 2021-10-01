@@ -1,4 +1,4 @@
-package com.example.pay_as_you_park
+package com.twistbase.custom_zoomable_floorplan
 
 import io.flutter.embedding.android.FlutterActivity
 
