@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<FloorPlanModel>(create: (context) => FloorPlanModel()),
+        ChangeNotifierProvider<FloorPlanModel>(
+            create: (context) => FloorPlanModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

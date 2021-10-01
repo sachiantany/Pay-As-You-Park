@@ -16,7 +16,7 @@ class FloorPlanScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(100.0),
+        preferredSize: Size.fromHeight(120.0),
         child: AppBarWidget(),
       ),
       body: ClipRRect(

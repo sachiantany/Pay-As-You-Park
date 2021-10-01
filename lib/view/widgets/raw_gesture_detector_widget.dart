@@ -38,9 +38,10 @@ class RawGestureDetectorWidget extends StatelessWidget {
             ..onStart = (details) {
               model.handleDragScaleStart(details);
             }
-            ..onUpdate = (details) {
-              model.handleDragScaleUpdate(details);
-            }
+            //Zoom and draging is stoped by commenting this code
+            // ..onUpdate = (details) {
+            //   model.handleDragScaleUpdate(details);
+            // }
             ..onEnd = (_) {
               model.handleDragScaleEnd();
             };
