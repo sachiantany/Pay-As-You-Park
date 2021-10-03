@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
+import 'custom_drawer.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -208,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
       ]),
+      drawer: CustomDrawer(),
     );
   }
 
@@ -218,6 +221,9 @@ class _HomeScreenState extends State<HomeScreen> {
       actions: _buildActions(context),
     );
   }
+
+  // Drawer methods:-----------------------------------------------------------
+
 
   List<Widget> _buildActions(BuildContext context) {
     return <Widget>[
