@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 abstract class Global {
   var parkingCount = 10;
   static const Color blue = const Color(0xff4A64FE);
-  static const List lights = [
+
+  static const List slots = [
     //Left Line parking slots
+
     {
       'location': 'Kitchen',
       'name': 'A01',
-      'status': false,
+      'status': true,
       'position': [-0.125, -0.310],
       'tile': 1,
     },
@@ -29,7 +31,7 @@ abstract class Global {
     {
       'location': 'Kitchen',
       'name': 'A04',
-      'status': false,
+      'status': true,
       'position': [-0.125, -0.172],
       'tile': 1,
     },

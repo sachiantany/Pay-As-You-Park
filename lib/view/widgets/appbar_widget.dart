@@ -13,14 +13,14 @@ class AppBarWidget extends StatelessWidget {
             Text(
               'Floor Plan Screen',
               style: TextStyle(
-                color: Global.blue,
+                color: Colors.blue,
                 fontWeight: FontWeight.w900,
                 fontSize: 16.0,
               ),
             ),
             Icon(
               Icons.arrow_drop_down,
-              color: Global.blue,
+              color: Colors.blue,
             )
           ],
         ),

@@ -13,7 +13,7 @@ class ResetButtonWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: RaisedButton(
           elevation: 10.0,
-          color: Global.blue,
+          color: Colors.blue,
           onPressed: () {
             model.reset();
           },

@@ -1,5 +1,7 @@
+import 'package:custom_zoomable_floorplan/core/models/location_model.dart';
 import 'package:custom_zoomable_floorplan/core/models/models.dart';
 import 'package:custom_zoomable_floorplan/view/shared/global.dart';
+import 'package:custom_zoomable_floorplan/view/shared/global_location.dart';
 import 'package:flutter/cupertino.dart';
 
 class Pos {
@@ -34,9 +36,12 @@ class FloorPlanModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Light> _lights =
-      Global.lights.map((item) => Light.fromMap(item)).toList();
-  List<Light> get lights => _lights;
+  List<Slot> _slots = Global.slots.map((item) => Slot.fromMap(item)).toList();
+  List<Slot> get slots => _slots;
+
+  List<Location> _location =
+      GlobalLocation.locations.map((item) => Location.fromMap(item)).toList();
+  List<Location> get locations => _location;
 
   void handleDragScaleStart(ScaleStartDetails details) {
     _hasTouched = true;

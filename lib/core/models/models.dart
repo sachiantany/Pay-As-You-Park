@@ -1,11 +1,11 @@
-class Light {
+class Slot {
   String location;
   String name;
   bool status;
   List<double> position;
   int tile;
 
-  Light.fromMap(Map data) {
+  Slot.fromMap(Map data) {
     this.location = data['location'] ?? 'No location.';
     this.name = data['name'] ?? 'No name.';
     this.status = data['status'] ?? false;

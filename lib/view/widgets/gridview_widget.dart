@@ -1,3 +1,4 @@
+import 'package:custom_zoomable_floorplan/core/models/location_model.dart';
 import 'package:custom_zoomable_floorplan/core/models/models.dart';
 import 'package:custom_zoomable_floorplan/core/viewmodels/floorplan_model.dart';
 import 'package:custom_zoomable_floorplan/view/shared/global.dart';
@@ -20,8 +21,13 @@ class GridViewWidget extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         int currentTile = index + 1;
-        List<Light> tileLights =
-            model.lights.where((item) => item.tile == currentTile).toList();
+        int locationTile = 1;
+        List<Slot> tileSlots =
+            model.slots.where((item) => item.tile == currentTile).toList();
+
+        List<Location> titleLocation = model.locations
+            .where((item) => item.tileLocation == locationTile)
+            .toList();
 
         return Stack(
           alignment: Alignment.center,
@@ -32,18 +38,18 @@ class GridViewWidget extends StatelessWidget {
             ),
             Stack(
               children: List.generate(
-                tileLights.length,
+                tileSlots.length,
                 (idx) {
                   return Transform.translate(
                     offset: Offset(
-                      size.width * tileLights[idx].position[0],
-                      size.width * tileLights[idx].position[1],
+                      size.width * tileSlots[idx].position[0],
+                      size.width * tileSlots[idx].position[1],
                     ),
                     child: Stack(
                       alignment: Alignment.center,
                       children: <Widget>[
                         CircleAvatar(
-                          backgroundColor: tileLights[idx].status
+                          backgroundColor: tileSlots[idx].status
                               ? Colors.greenAccent
                               : Colors.white,
                           radius: 5.0,
@@ -58,13 +64,52 @@ class GridViewWidget extends StatelessWidget {
                         Transform(
                           transform: Matrix4.identity()..translate(18.0),
                           child: Text(
-                            tileLights[idx].name,
+                            tileSlots[idx].name,
                             style: TextStyle(
                               fontSize: 6.0,
                               color: Colors.white,
                             ),
                           ),
-                        )
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            Stack(
+              children: List.generate(
+                titleLocation.length,
+                (idx) {
+                  return Transform.translate(
+                    offset: Offset(
+                      size.width * titleLocation[idx].positionLocation[0],
+                      size.width * titleLocation[idx].positionLocation[1],
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 5.0,
+                          child: Center(
+                            child: Icon(
+                              Icons.my_location_rounded,
+                              color: Global.blue,
+                              size: 7,
+                            ),
+                          ),
+                        ),
+                        Transform(
+                          transform: Matrix4.identity()..translate(18.0),
+                          child: Text(
+                            titleLocation[idx].nameLocation,
+                            style: TextStyle(
+                              fontSize: 6.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   );

@@ -1,4 +1,4 @@
-import 'package:custom_zoomable_floorplan/view/shared/global.dart';
+//import 'package:custom_zoomable_floorplan/view/shared/global.dart';
 import 'package:flutter/material.dart';
 
 class OverlayWidget extends StatelessWidget {
@@ -7,7 +7,7 @@ class OverlayWidget extends StatelessWidget {
     return IgnorePointer(
       ignoring: true,
       child: Container(
-        color: Global.blue.withOpacity(0.85),
+        color: Colors.blue.withOpacity(0.85),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
