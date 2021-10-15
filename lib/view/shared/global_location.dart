@@ -21,7 +21,7 @@ abstract class GlobalLocation {
 
   // final distanceY = response.then((value) => value[0]["distanceY"]);
 
-  static const List<double> userLocationX = [0.0, -0.05];
+  static const List<double> userLocationX = [0.0];
   static const List<double> userLocationY = [
     0.3,
     0.2,
@@ -32,13 +32,18 @@ abstract class GlobalLocation {
     -0.3,
   ];
 
+  // for (var i = 0; i < userLocationX.length; i++)
+  //         {print(i),
+  //       userLocationY[6]}
+
   static const Color blue = const Color(0xff4A64FE);
   static List locations = [
-    {
-      'nameLocation': 'User',
-      'positionLocation': [userLocationX[0], userLocationY[6]],
-      'tileLocation': 1
-    }
+    for (var i = 0; i < userLocationX.length; i++)
+      {
+        'nameLocation': 'User',
+        'positionLocation': [userLocationX[0], userLocationY[i]],
+        'tileLocation': 1
+      }
   ];
 
   // static List locations = [
