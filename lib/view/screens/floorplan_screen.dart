@@ -13,7 +13,7 @@ class FloorPlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<FloorPlanModel>(context);
-    var slot = "A00";
+    var slot = "A01";
     if (slot == "A00") {
       return Scaffold(
         backgroundColor: Colors.white,
@@ -36,7 +36,7 @@ class FloorPlanScreen extends StatelessWidget {
                     child: GridViewWidget(),
                   ),
                   // model.hasTouched ? ResetButtonWidget() : OverlayWidget()
-                  ResetButtonWidget()
+                  //ResetButtonWidget()
                 ],
               ),
             ),
@@ -65,7 +65,7 @@ class FloorPlanScreen extends StatelessWidget {
                     child: GridViewWidgetA04(),
                   ),
                   // model.hasTouched ? ResetButtonWidget() : OverlayWidget()
-                  ResetButtonWidget()
+                  //ResetButtonWidget()
                 ],
               ),
             ),
@@ -94,7 +94,7 @@ class FloorPlanScreen extends StatelessWidget {
                     child: GridViewWidgetA01(),
                   ),
                   // model.hasTouched ? ResetButtonWidget() : OverlayWidget()
-                  ResetButtonWidget()
+                  //ResetButtonWidget()
                 ],
               ),
             ),
