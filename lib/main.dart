@@ -30,6 +30,15 @@ class _MyHomePageState extends State<MyHomePage> {
   var _textController = new TextEditingController();
   String _value = null;
 
+  showToast() => Fluttertoast.showToast(
+      msg: "Please Select a Slot",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0);
+
   onClickSendVariables() {
     String valStr = _value;
     if (_value != null) {
@@ -39,14 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
       Navigator.of(context).push(route);
     } else {
-      // Fluttertoast.showToast(
-      //     msg: "This is Center Short Toast",
-      //     toastLength: Toast.LENGTH_SHORT,
-      //     gravity: ToastGravity.CENTER,
-      //     timeInSecForIosWeb: 1,
-      //     backgroundColor: Colors.red,
-      //     textColor: Colors.white,
-      //     fontSize: 16.0);
+      showToast();
     }
 
     // Navigator.push(
