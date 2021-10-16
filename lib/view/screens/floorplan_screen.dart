@@ -10,10 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FloorPlanScreen extends StatelessWidget {
+  const FloorPlanScreen(this.value);
+  final String value;
+
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<FloorPlanModel>(context);
-    var slot = "A01";
+    String slot = value;
+    //var slot = "A00";
     if (slot == "A00") {
       return Scaffold(
         backgroundColor: Colors.white,

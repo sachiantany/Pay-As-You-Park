@@ -7,9 +7,9 @@ import 'package:custom_zoomable_floorplan/service/getLocation_service.dart';
 
 abstract class GlobalLocation {
   // static String distanceX = Service().getIndoorLocation();
-  var distanceOfX = [];
-  var distanceOfY = [];
-  static Future<dynamic> responseList = Service().getIndoorLocation();
+  // var distanceOfX = [];
+  // var distanceOfY = [];
+  // static Future<dynamic> responseList = Service().getIndoorLocation();
 
   // List<dynamic> setUserLocation(){
   //   for(var i = 0; i < responseList.toString().length; i++){
@@ -21,6 +21,8 @@ abstract class GlobalLocation {
 
   // final distanceY = response.then((value) => value[0]["distanceY"]);
 
+  var response = Service().getIndoorLocationDetails();
+  print(response);
   static const List<double> userLocationX = [0.0];
   static const List<double> userLocationY = [
     0.3,
@@ -41,7 +43,7 @@ abstract class GlobalLocation {
     for (var i = 0; i < userLocationX.length; i++)
       {
         'nameLocation': 'User',
-        'positionLocation': [userLocationX[0], userLocationY[i]],
+        'positionLocation': [userLocationX[0], userLocationY[0]],
         'tileLocation': 1
       }
   ];

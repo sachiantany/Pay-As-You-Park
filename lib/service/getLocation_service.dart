@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'dart:ffi';
 
+import 'package:custom_zoomable_floorplan/core/models/getLocationModel.dart';
+import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 
 class Service {
@@ -23,5 +24,24 @@ class Service {
       return locationDetails;
     }
     return null;
+  }
+
+  Future<GetLocationModel> getIndoorLocationDetails() async {
+    String url = 'https://pay-as-you-park-mobile-server.herokuapp.com/indoor';
+    Response response;
+    var locationModel = null;
+
+    try {
+      response = await dio.get(url);
+
+      if (response.statusCode == 200) {
+        var jsonString = response.data;
+        var jsonMap = jsonDecode(jsonString);
+        locationModel = GetLocationModel.fromJson(jsonMap);
+      }
+    } catch (Exception) {
+      return locationModel;
+    }
+    return locationModel;
   }
 }
