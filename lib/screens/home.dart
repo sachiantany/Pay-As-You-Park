@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_as_you_park/model/directions_model.dart';
 import 'package:pay_as_you_park/services/directions_repository.dart';
+import 'package:pay_as_you_park/services/suggestion_yard_service.dart';
+import 'package:pay_as_you_park/store/driver/diver_store.dart';
+import 'package:pay_as_you_park/store/suggestions/suggestion_store.dart';
 import 'package:pay_as_you_park/utils/routes/routes.dart';
 import 'dart:async';
 import 'dart:typed_data';
@@ -11,12 +14,16 @@ import 'package:location/location.dart';
 
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+
+  final DriverStore user;
+
+  HomeScreen({Key? key, required this.user}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   late StreamSubscription _locationSubscription;
   Location _locationTracker = Location();
   late Marker marker;
@@ -27,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late double destinationLon;
   late String parkingYardId;
   late Directions _info;
+  late SuggestionStore _suggestionStore = SuggestionStore();
 
 
 
@@ -37,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
     target: LatLng(6.0535, 80.2210),
     zoom: 14.4746,
   );
+
 
   Future<Uint8List> getMarker() async {
     ByteData byteData = await DefaultAssetBundle.of(context).load("assets/icons/car_icon.png");
@@ -67,7 +76,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void getCurrentLocation() async {
     try {
-
       Uint8List imageData = await getMarker();
       var location = await _locationTracker.getLocation();
 
@@ -78,7 +86,6 @@ class _HomeScreenState extends State<HomeScreen> {
       /*if (_locationSubscription != null) {
         _locationSubscription.cancel();
       }*/
-
 
       _locationSubscription = _locationTracker.onLocationChanged.listen((newLocalData) {
         if (_controller != null) {
@@ -108,28 +115,44 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  void getDestination() async {
+   getDestination() async {
     getCurrentLocation();
-    destinationLat = 6.9271;
-    destinationLon = 79.8612;
+    int length = int.parse(widget.user.vehicleLength);
+    int width = int.parse(widget.user.vehicleWidth);
+    int height = int.parse(widget.user.vehicleHeight);
 
-    LatLng latlng = LatLng(destinationLat,destinationLon);
-    this.setState(() {
-      _destination = Marker(
-          markerId: MarkerId("destination"),
-          position: latlng,
-          draggable: false,
-          zIndex: 2,
-          flat: true,
-          anchor: Offset(0.5, 0.5),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue));
-    });
 
-    final directions = await DirectionsRepository()
-        .getDirections(origin: marker.position, destination: latlng);
-    setState(() => _info = directions!);
+    final suggestions = await _suggestionStore.GetYardSuggestion(marker.position.latitude, marker.position.longitude, length, width, height);
+    //setState(() => _suggestionStore = suggestions!);
+    if(_suggestionStore.success == true){
 
-    destination_active = true;
+      destinationLat = double.parse(_suggestionStore.latitude);
+      destinationLon = double.parse(_suggestionStore.longitude);
+      parkingYardId = _suggestionStore.yard_id;
+    }else{
+      //error
+      print('error in predict');
+    }
+    if(_suggestionStore.success){
+      LatLng latlng = LatLng(destinationLat,destinationLon);
+      this.setState(() {
+        _destination = Marker(
+            markerId: MarkerId("destination"),
+            position: latlng,
+            draggable: false,
+            zIndex: 2,
+            flat: true,
+            anchor: Offset(0.5, 0.5),
+            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue));
+      });
+
+      final directions = await DirectionsRepository()
+          .getDirections(origin: marker.position, destination: latlng);
+      setState(() => _info = directions!);
+
+      destination_active = true;
+    }
+
   }
 
   @override

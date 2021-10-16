@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pay_as_you_park/screens/home.dart';
 import 'package:pay_as_you_park/store/driver/diver_store.dart';
 import 'package:pay_as_you_park/utils/device/device_util.dart';
 import 'package:pay_as_you_park/utils/routes/routes.dart';
@@ -16,7 +17,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -209,8 +210,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget navigate(BuildContext context) {
     Future.delayed(Duration(milliseconds: 0), () {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.homepage, (Route<dynamic> route) => false);
+      //Navigator.of(context).pushNamedAndRemoveUntil(
+      //    Routes.homepage, (Route<dynamic> route) => false);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(user: _store),
+          ));
+
     });
 
     return Container();

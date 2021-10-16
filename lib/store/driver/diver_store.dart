@@ -168,6 +168,13 @@ abstract class _DriverStore with Store {
     loading = true;
     DriverService().login(userEmail, password).then((val){
       if(val.data['result'] != null){
+        var data = val.data['result'];
+        setUserId(data['email']);
+        setFisrtName (data['first_name']);
+        setLastName(data['last_name']);
+        setHeight(data['vehicle_height']);
+        setWidth(data['vehicle_width']);
+        setLength(data['vehicle_length']);
         loading = false;
         success = true;
       }else{
