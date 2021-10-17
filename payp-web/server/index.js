@@ -6,15 +6,17 @@ import cors from 'cors';
 
 import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js";
+import parkingAreaRouter from './routes/parkingAreas.js';
 
 const app = express();
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use("/user", userRouter);
+app.use('/parkingArea', parkingAreaRouter);
 
 const CONNECTION_URL = 'mongodb+srv://admin:admin@cluster0.rubhg.mongodb.net/paypdb?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;

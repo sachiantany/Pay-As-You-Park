@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
 
     let decodedData;
 
-    if (token && isCustomAuth) {      
+    if (token && isCustomAuth) {
       decodedData = jwt.verify(token, secret);
 
       req.userId = decodedData.id;
@@ -17,10 +17,11 @@ const auth = async (req, res, next) => {
       decodedData = jwt.decode(token);
 
       req.userId = decodedData.sub;
-    }    
+    }
 
     next();
   } catch (error) {
+    res.send('Error has occur '+error);
     console.log(error);
   }
 };
