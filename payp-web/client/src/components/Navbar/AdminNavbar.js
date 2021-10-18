@@ -11,7 +11,7 @@ import './Header.css';
 import Icon from "../../images/icon.svg"
 
 
-const GuestNavbar = () => {
+const AdminNavbar = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const location = useLocation();
@@ -22,6 +22,7 @@ const GuestNavbar = () => {
       dispatch({ type: actionType.LOGOUT });
   
       history.push('/auth');
+      window.location.reload(); 
   
       setUser(null);
     };
@@ -74,7 +75,7 @@ const GuestNavbar = () => {
                             <img src={Icon} className="nav-link-apple"></img>
                         </li>
                         <li className="nav-item">
-                            <a href="mac" className="nav-link">Pay as you park</a>
+                            <a href="mac" className="nav-link">Pay as you park - Yard Owner</a>
                         </li>
                     
                         <li className="nav-item">
@@ -118,57 +119,4 @@ const GuestNavbar = () => {
     }
 
  
-export default GuestNavbar;
-
-
-
-
-
-
-
-
-
-
-// import React, {Component}from "react"
-// import Navlink from "./Navlink"
-// import logo from "../../images/icons/app.svg"
-// import search from "../../images/icons/search-icon-sm.png"
-// import cart from "../../images/icons/cart-sm.png"
-// import './Header.css'
-
-// className GuestNavbar extends Component {
-//     render() { 
-//         return ( 
-//             <div classNameName="nav-wrapper fixed-top">
-//                 <div classNameName="container">
-//                     <nav classNameName="navbar navbar-toggleable-sm navbar-expand-md">
-//                         <button classNameName="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-//                             ☰
-//                         </button>
-//                         <a classNameName="navbar-brand mx-auto" href="#top"><img src={logo}/></a>
-
-//                         <div classNameName="navbar-collapse collapse">
-//                             <ul classNameName="navbar-nav nav-justified w-100 nav-fill">
-
-//                                 <Navlink linkUrl ="#top"linkName="Mac"/>
-//                                 <Navlink linkUrl ="#top"linkName="iPhone"/>
-//                                 <Navlink linkUrl ="#top"linkName="iPad"/>
-//                                 <Navlink linkUrl ="#top"linkName="Watch"/>
-//                                 <Navlink linkUrl ="#top"linkName="TV"/>
-//                                 <Navlink linkUrl ="#top"linkName="Music"/>
-//                                 <Navlink linkUrl ="#top"linkName="Support"/>
-//                                 <Navlink linkUrl ="#top" Image = {<img src={search}/>}/>
-//                                 <Navlink linkUrl ="#top" Image = {<img src={cart}/>}/>
-                                
-                
-                             
-//                             </ul>
-//                         </div>
-//                     </nav>
-//                 </div>
-// 	        </div>
-//         );     
-//     }
-// }
- 
-// export default GuestNavbar;
+export default AdminNavbar;

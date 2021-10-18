@@ -46,5 +46,11 @@ export default makeStyles((theme) => ({
     width: '5px',
     height: '30px',
     marginTop: "5px"
+  },
+
+  login: {
+    // color: "#0093F7"
+    background: "#00A6F9",
+    color: "White"
   }
 }));
