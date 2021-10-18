@@ -1,19 +1,11 @@
 import cv2 as cv
 import numpy as np
 import tensorflow as tf
-import argparse
-import sys
 import os.path
-import random
 import os
-import glob
-import operator
 import time
-
-import json
-import io
-from PIL import Image
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 tf.compat.v1.disable_eager_execution()
 
@@ -30,7 +22,7 @@ def predict(path):
         'quality': '',
         'probability': ''
     }
-
+    
     width = round(cap.get(cv.CAP_PROP_FRAME_WIDTH))
     height = round(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 
@@ -220,16 +212,33 @@ def predict(path):
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
+# print("Test : ", predict('https://sableasphalt.com/wp-content/uploads/2018/02/Sable-Potholes-Before.jpg'))
+CORS(app, resources={r'/*': {'origins': '*'}})
+
+@app.route("/mode", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        url = request.json
-        content = url['url']
+        # url = request.json
+        # content = url['url']
+
+        print("Test 1 : ", request.args['url1'])
+
+        content = request.args['url1']
+        print("Test 2 : ", content)
+
+        # conSplit = content.decode('UTF-8')   
+
+        print("Test 3 : ", content)
+
+
         if content is None or content == "":
             return jsonify({"error": "no file"})
 
         try:
             prediction = predict(content)
+            print("Test : ", prediction)
+            # prediction.headers.add('Access-Control-Allow-Origin', '*')
+
             return jsonify(prediction)
         except Exception as e:
             return jsonify({"error 1": str(e)})
@@ -238,4 +247,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='127.0.0.1', port=5002, debug=True)
