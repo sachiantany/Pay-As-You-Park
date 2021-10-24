@@ -19,6 +19,7 @@ dependencies:
   provider: ^4.3.1
   http: ^0.13.3
   fluttertoast: ^8.0.8
+  flutter_phoenix: "^1.0.0"
 
 
 dev_dependencies:

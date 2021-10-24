@@ -50,7 +50,7 @@ class GridViewWidget extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           backgroundColor: tileSlots[idx].status
-                              ? Colors.white
+                              ? Colors.red
                               : Colors.greenAccent,
                           radius: 5.0,
                           child: Center(

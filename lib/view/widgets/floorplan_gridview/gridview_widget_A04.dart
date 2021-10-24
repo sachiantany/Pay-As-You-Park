@@ -21,6 +21,7 @@ class GridViewWidgetA04 extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         int currentTile = index + 1;
+
         int locationTile = 1;
         List<Slot> tileSlots =
             model.slots.where((item) => item.tile == currentTile).toList();
@@ -50,7 +51,7 @@ class GridViewWidgetA04 extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           backgroundColor: tileSlots[idx].status
-                              ? Colors.white
+                              ? Colors.red
                               : Colors.greenAccent,
                           radius: 5.0,
                           child: Center(

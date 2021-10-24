@@ -1,12 +1,12 @@
 import 'package:custom_zoomable_floorplan/core/viewmodels/floorplan_model.dart';
-import 'package:custom_zoomable_floorplan/view/shared/global.dart';
+// import 'package:custom_zoomable_floorplan/view/shared/global.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ResetButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<FloorPlanModel>(context);
+    final model = Provider.of<FloorPlanModel>(context, listen: true);
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(

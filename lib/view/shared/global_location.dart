@@ -30,23 +30,34 @@ abstract class GlobalLocation {
     0.1,
     0.0,
     -0.1,
-    -0.2,
-    -0.3,
+    -0.17, //to A04
+    -0.3, //to A01
+  ];
+
+  static const Color blue = const Color(0xff4A64FE);
+  static List locations = [
+    {
+      'nameLocation': 'User',
+      'positionLocation': [userLocationX[0], userLocationY[0]],
+      'tileLocation': 1
+    }
   ];
 
   // for (var i = 0; i < userLocationX.length; i++)
   //         {print(i),
   //       userLocationY[6]}
 
-  static const Color blue = const Color(0xff4A64FE);
-  static List locations = [
-    for (var i = 0; i < userLocationX.length; i++)
-      {
-        'nameLocation': 'User',
-        'positionLocation': [userLocationX[0], userLocationY[0]],
-        'tileLocation': 1
-      }
-  ];
+  // static const Color blue = const Color(0xff4A64FE);
+  // static List locations = [
+  //   for (var i = 0; i < userLocationX.length; i++)
+  //     {
+  //       'nameLocation': 'User',
+  //       'positionLocation': [userLocationX[0], userLocationY[0]],
+  //       'tileLocation': 1
+  //     }
+  // ];
+
+  notifyListeners();
 
   // static List locations = [
   //   {

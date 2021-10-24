@@ -8,6 +8,17 @@ import 'package:custom_zoomable_floorplan/view/widgets/raw_gesture_detector_widg
 import 'package:custom_zoomable_floorplan/view/widgets/reset_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+
+// void main() {
+//   String value;
+//   runApp(
+//     /// 1. Wrap your App widget in the Phoenix widget
+//     Phoenix(
+//       child: FloorPlanScreen(value),
+//     ),
+//   );
+// }
 
 class FloorPlanScreen extends StatelessWidget {
   const FloorPlanScreen(this.value);
@@ -17,6 +28,7 @@ class FloorPlanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final model = Provider.of<FloorPlanModel>(context);
     String slot = value;
+
     //var slot = "A00";
     if (slot == "A00") {
       return Scaffold(
@@ -40,7 +52,21 @@ class FloorPlanScreen extends StatelessWidget {
                     child: GridViewWidget(),
                   ),
                   // model.hasTouched ? ResetButtonWidget() : OverlayWidget()
-                  //ResetButtonWidget()
+                  ResetButtonWidget()
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   height: 48.0,
+                  //   child: TextButton(
+                  //     style: TextButton.styleFrom(
+                  //       backgroundColor: Colors.red,
+                  //       primary: Colors.white,
+                  //     ),
+                  //     child: const Text('Phoenix.rebirth(context);'),
+
+                  //     /// 2. Call Phoenix.rebirth(context) to rebuild your app
+                  //     onPressed: () => Phoenix.rebirth(context),
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -69,7 +95,7 @@ class FloorPlanScreen extends StatelessWidget {
                     child: GridViewWidgetA04(),
                   ),
                   // model.hasTouched ? ResetButtonWidget() : OverlayWidget()
-                  //ResetButtonWidget()
+                  ResetButtonWidget()
                 ],
               ),
             ),
@@ -98,7 +124,7 @@ class FloorPlanScreen extends StatelessWidget {
                     child: GridViewWidgetA01(),
                   ),
                   // model.hasTouched ? ResetButtonWidget() : OverlayWidget()
-                  //ResetButtonWidget()
+                  ResetButtonWidget()
                 ],
               ),
             ),

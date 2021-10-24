@@ -41,6 +41,7 @@ class FloorPlanModel extends ChangeNotifier {
 
   List<Location> _location =
       GlobalLocation.locations.map((item) => Location.fromMap(item)).toList();
+  notifyListeners();
   List<Location> get locations => _location;
 
   void handleDragScaleStart(ScaleStartDetails details) {
@@ -77,6 +78,8 @@ class FloorPlanModel extends ChangeNotifier {
     _previousPos = Pos(0.0, 0.0);
     _endPos = Pos(0.0, 0.0);
     _isScaled = false;
+    _location =
+        GlobalLocation.locations.map((item) => Location.fromMap(item)).toList();
     notifyListeners();
   }
 
