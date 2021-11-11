@@ -83,8 +83,8 @@ class GridViewWidget extends StatelessWidget {
                 (idx) {
                   return Transform.translate(
                     offset: Offset(
-                      size.width * titleLocation[idx].positionLocation[0],
-                      size.width * titleLocation[idx].positionLocation[1],
+                      size.width * titleLocation[idx].positionLocationX,
+                      size.width * titleLocation[idx].positionLocationY,
                     ),
                     child: Stack(
                       alignment: Alignment.center,

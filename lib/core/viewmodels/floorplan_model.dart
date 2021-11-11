@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:custom_zoomable_floorplan/core/models/location_model.dart';
 import 'package:custom_zoomable_floorplan/core/models/models.dart';
 import 'package:custom_zoomable_floorplan/view/shared/global.dart';
 import 'package:custom_zoomable_floorplan/view/shared/global_location.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:async/async.dart';
 
 class Pos {
   double x = 0.0;
@@ -21,6 +24,11 @@ class FloorPlanModel extends ChangeNotifier {
   Pos _previousPos = Pos(0.0, 0.0);
   Pos _endPos = Pos(0.0, 0.0);
   bool _isScaled = false;
+  static double _userX = 0.0;
+  static double _userY = 0.3;
+
+  static double get userX => _userX;
+  static double get userY => _userY;
 
   double get scale => _scale;
   double get previousScale => _previousScale;
@@ -39,8 +47,9 @@ class FloorPlanModel extends ChangeNotifier {
   List<Slot> _slots = Global.slots.map((item) => Slot.fromMap(item)).toList();
   List<Slot> get slots => _slots;
 
-  List<Location> _location =
-      GlobalLocation.locations.map((item) => Location.fromMap(item)).toList();
+  List<Location> _location = getUserLocation(userX, userY)
+      .map((item) => Location.fromMap(item))
+      .toList();
   notifyListeners();
   List<Location> get locations => _location;
 
@@ -71,6 +80,30 @@ class FloorPlanModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  static const List<double> userLocationX = [0.0];
+  static const List<double> userLocationY = [
+    0.3,
+    0.2,
+    0.1,
+    0.0,
+    -0.1,
+    -0.17, //to A04
+    -0.3, //to A01
+  ];
+
+  static List getUserLocation(userLocX, userLocY) {
+    List userLocation = [
+      {
+        'nameLocation': 'User',
+        'positionLocationX': userLocX,
+        'positionLocationY': userLocY,
+        'tileLocation': 1
+      }
+    ];
+
+    return userLocation;
+  }
+
   void reset() {
     _scale = 2.0;
     _previousScale = 2.0;
@@ -78,8 +111,11 @@ class FloorPlanModel extends ChangeNotifier {
     _previousPos = Pos(0.0, 0.0);
     _endPos = Pos(0.0, 0.0);
     _isScaled = false;
-    _location =
-        GlobalLocation.locations.map((item) => Location.fromMap(item)).toList();
+    _userX = userLocationX[0];
+    _userY = userLocationY[1];
+    _location = getUserLocation(_userX, _userY)
+        .map((item) => Location.fromMap(item))
+        .toList();
     notifyListeners();
   }
 
