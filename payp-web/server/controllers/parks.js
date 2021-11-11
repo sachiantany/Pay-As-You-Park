@@ -30,7 +30,7 @@ export const getPark = async (req, res) => {
 export const createPark = async (req, res) => {
     const park = req.body;
 
-    const newcarParks = new carPark({ ...park, creator: req.userId, createdAt: new Date().toISOString() })
+    const newcarParks = new carPark({ ...park, creator: req.userId, createdAt: new Date().toISOString(), NextEvaluationDate:new Date().toISOString(), Status: 'Pending' })
 
     try {
         await newcarParks.save();

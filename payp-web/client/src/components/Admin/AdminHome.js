@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 
 import { getPosts } from '../../actions/posts';
 import Posts from '../Posts/Posts';
-import Form from '../Form/Form';
+// import Form from '../Form/Form';
+import Form from '../Form/ParkRegisterForm';
 
 const AdminHome = () => { 
 
@@ -22,7 +23,7 @@ const AdminHome = () => {
         // <div className="home">
             <Grow in>
             <Container>
-                <Grid container justify="space-between" spacing={3}>
+                <Grid container justifyContent="space-between" spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <Posts setCurrentId={setCurrentId} />
                 </Grid>

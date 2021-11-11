@@ -118,7 +118,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <div className={classes.mapBox}>
           <ReactMapGL
           {...viewport}
-            mapboxApiAccessToken="pk.eyJ1Ijoic2FjaGlhbnRhbnkiLCJhIjoiY2t1YjVpc3BkMG5jaDJ3bzg5c2hpZ214YyJ9.wsMpg-9i7e4YlX7RUxliZA"
+            // mapboxApiAccessToken="pk.eyJ1Ijoic2FjaGlhbnRhbnkiLCJhIjoiY2t1YjVpc3BkMG5jaDJ3bzg5c2hpZ214YyJ9.wsMpg-9i7e4YlX7RUxliZA"
             transitionDuration="100"
             mapStyle="mapbox://styles/sachiantany/ckusu8qgi3qr017tfr7t95pij"
             onViewportChange={(nextViewport) => setViewport(nextViewport)}
