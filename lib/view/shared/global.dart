@@ -5,7 +5,7 @@ abstract class Global {
   static const Color blue = const Color(0xff4A64FE);
 
   static const List slots = [
-    //Left Line parking slots
+    //Below are the correct ones
 
     {
       'location': 'Kitchen',
