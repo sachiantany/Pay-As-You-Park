@@ -26,6 +26,14 @@ class FloorPlanModel extends ChangeNotifier {
   bool _isScaled = false;
   static double _userX = 0.0;
   static double _userY = 0.3;
+  double positionX;
+  double positionY;
+  int actualX;
+  int actualY;
+  int lengthX;
+  int lengthY;
+  int convertionConstantY = 730;
+  int convertionConstantX = 907;
 
   static double get userX => _userX;
   static double get userY => _userY;
@@ -80,16 +88,16 @@ class FloorPlanModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  static const List<double> userLocationX = [0.0];
-  static const List<double> userLocationY = [
-    0.3,
-    0.2,
-    0.1,
-    0.0,
-    -0.1,
-    -0.17, //to A04
-    -0.3, //to A01
-  ];
+  // static const List<double> userLocationX = [0.0];
+  // static const List<double> userLocationY = [
+  //   0.3,
+  //   0.2,
+  //   0.1,
+  //   0.0,
+  //   -0.1,
+  //   -0.17, //to A04
+  //   -0.3, //to A01
+  // ];
 
   static List getUserLocation(userLocX, userLocY) {
     List userLocation = [
@@ -104,15 +112,68 @@ class FloorPlanModel extends ChangeNotifier {
     return userLocation;
   }
 
+  //Get converted Image Positions
+
+  double getPositionX(lengthX, actualX) {
+    double x;
+    x = actualX.toDouble();
+
+    positionX = ((actualX) - (lengthX / 2));
+    print(positionX);
+
+    double imagePositionX = positionX / convertionConstantX;
+    // print(imagePositionX);
+    return imagePositionX;
+  }
+
+  double getPositionY(lengthY, actualY) {
+    double y;
+    y = actualY.toDouble();
+
+    if (y == lengthY / 2) {
+      positionY = ((actualY) - (lengthY / 2));
+    } else if (y < lengthY / 2) {
+      positionY = -((actualY) - (lengthY / 2));
+    } else {
+      positionY = -((actualY) - (lengthY / 2));
+    }
+
+    double imagePositionY = positionY / convertionConstantY;
+    // print(imagePositionY);
+    return imagePositionY;
+  }
+
   void reset() {
+    // int userActualPositionX = 137;
+
+    int userValidationPositionX = 274;
+    int userActualPositionX = 125;
+
+    int userValidationPositionY = 438;
+    int userActualPositionY = 200;
+
+    if (userValidationPositionY <= userActualPositionY) {
+      userValidationPositionY = 438;
+    } else {
+      userValidationPositionY = userActualPositionY;
+    }
+
+    if (userValidationPositionX <= userActualPositionX) {
+      userValidationPositionX = 274;
+    } else {
+      userValidationPositionX = userActualPositionX;
+    }
+
+    double userImagePositionX = getPositionX(274, userValidationPositionX);
+    double userImagePositionY = getPositionY(274, userValidationPositionY);
     _scale = 2.0;
     _previousScale = 2.0;
     _pos = Pos(0.0, 0.0);
     _previousPos = Pos(0.0, 0.0);
     _endPos = Pos(0.0, 0.0);
     _isScaled = false;
-    _userX = userLocationX[0];
-    _userY = userLocationY[1];
+    _userX = userImagePositionX;
+    _userY = userImagePositionY;
     _location = getUserLocation(_userX, _userY)
         .map((item) => Location.fromMap(item))
         .toList();
