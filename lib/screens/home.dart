@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pay_as_you_park/drawer/drawer.dart';
 import 'package:pay_as_you_park/model/directions_model.dart';
 import 'package:pay_as_you_park/services/directions_repository.dart';
 import 'package:pay_as_you_park/services/suggestion_yard_service.dart';
@@ -11,11 +13,14 @@ import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:pay_as_you_park/widgets/progress_indicator_widget.dart';
 
 
 class HomeScreen extends StatefulWidget {
 
   final DriverStore user;
+
+  static const String routeName = '/Home';
 
   HomeScreen({Key? key, required this.user}) : super(key: key);
   @override
@@ -40,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool marker_active = false;
   bool destination_active = false;
+  bool destination_search = false;
 
   static final CameraPosition initialLocation = CameraPosition(
     target: LatLng(6.0535, 80.2210),
@@ -95,6 +101,9 @@ class _HomeScreenState extends State<HomeScreen> {
               tilt: 0,
               zoom: 18.00)));
           updateMarkerAndCircle(newLocalData, imageData);
+          if(destination_active != false){
+            updateDirections();
+          }
         }
       });
 
@@ -116,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
    getDestination() async {
+    destination_search = true;
     getCurrentLocation();
     int length = int.parse(widget.user.vehicleLength);
     int width = int.parse(widget.user.vehicleWidth);
@@ -151,14 +161,49 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() => _info = directions!);
 
       destination_active = true;
+      destination_search = false;
     }
 
+  }
+
+  updateDirections() async {
+    destination_search = true;
+    if (_suggestionStore.success == true) {
+      destinationLat = double.parse(_suggestionStore.latitude);
+      destinationLon = double.parse(_suggestionStore.longitude);
+      parkingYardId = _suggestionStore.yard_id;
+    } else {
+      //error
+      print('error in predict');
+    }
+    if (_suggestionStore.success) {
+      LatLng latlng = LatLng(destinationLat, destinationLon);
+      this.setState(() {
+        _destination = Marker(
+            markerId: MarkerId("destination"),
+            position: latlng,
+            draggable: false,
+            zIndex: 2,
+            flat: true,
+            anchor: Offset(0.5, 0.5),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueBlue));
+      });
+
+      final directions = await DirectionsRepository()
+          .getDirections(origin: marker.position, destination: latlng);
+      setState(() => _info = directions!);
+
+      destination_active = true;
+      destination_search = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
+      drawer: GuestDrawer(firstName:widget.user.firstName,lastName:widget.user.lastName,email:widget.user.userEmail),
       body: Stack(alignment: Alignment.center,children: <Widget>[
         GoogleMap(
         mapToolbarEnabled: true,
@@ -230,6 +275,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+        Observer(
+          builder: (context) {
+            return Visibility(
+              visible: destination_search,
+              child: CustomProgressIndicatorWidget(),
+            );
+          },
+        )
+
       ]),
     );
   }
