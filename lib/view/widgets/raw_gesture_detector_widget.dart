@@ -23,7 +23,7 @@ class DragAndScale extends ScaleGestureRecognizer {
 class RawGestureDetectorWidget extends StatelessWidget {
   final Widget child;
 
-  RawGestureDetectorWidget({this.child});
+  RawGestureDetectorWidget({required this.child});
 
   @override
   Widget build(BuildContext context) {

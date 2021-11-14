@@ -11,10 +11,10 @@ String getSlotsModelToJson(GetSlotsModel data) => json.encode(data.toJson());
 
 class GetSlotsModel {
   GetSlotsModel({
-    this.pid,
-    this.name,
-    this.occupancy,
-    this.slots,
+    required this.pid,
+    required this.name,
+    required this.occupancy,
+    required this.slots,
   });
 
   String pid;
@@ -39,8 +39,8 @@ class GetSlotsModel {
 
 class Slots {
   Slots({
-    this.sid,
-    this.availability,
+    required this.sid,
+    required this.availability,
   });
 
   String sid;

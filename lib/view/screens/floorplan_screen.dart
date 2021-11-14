@@ -132,5 +132,6 @@ class FloorPlanScreen extends StatelessWidget {
         ),
       );
     }
+    throw NullThrownError();
   }
 }

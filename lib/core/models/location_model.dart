@@ -1,8 +1,8 @@
 class Location {
-  String nameLocation;
-  double positionLocationX;
-  double positionLocationY;
-  int tileLocation;
+  late String nameLocation;
+  late double positionLocationX;
+  late double positionLocationY;
+  late int tileLocation;
 
   Location.fromMap(Map data) {
     this.nameLocation = data['nameLocation'] ?? 'No name.';

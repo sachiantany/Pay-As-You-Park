@@ -12,11 +12,11 @@ String getLocationModelToJson(GetLocationModel data) =>
 
 class GetLocationModel {
   GetLocationModel({
-    this.id,
-    this.user,
-    this.distanceX,
-    this.distanceY,
-    this.v,
+    required this.id,
+    required this.user,
+    required this.distanceX,
+    required this.distanceY,
+    required this.v,
   });
 
   String id;

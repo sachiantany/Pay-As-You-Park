@@ -28,7 +28,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _textController = new TextEditingController();
-  String _value = null;
+  String _value = "";
 
   showToast() => Fluttertoast.showToast(
       msg: "Please Select a Slot",
@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   onClickSendVariables() {
     String valStr = _value;
-    if (_value != null) {
+    if (_value != "") {
       var route = new MaterialPageRoute(
         builder: (BuildContext context) =>
             new NextPage(value: _value.toString()),
@@ -109,14 +109,14 @@ class _MyHomePageState extends State<MyHomePage> {
               borderRadius: BorderRadius.circular(8),
               color: Colors.white,
             ),
-            child: DropdownButton(
+            child: DropdownButton<String>(
                 value: _value,
                 icon: Icon(Icons.arrow_drop_down),
                 iconSize: 42,
                 items: [
                   DropdownMenuItem(
                     child: Text("Please Select the Slot"),
-                    value: null,
+                    value: "",
                   ),
                   DropdownMenuItem(
                     child: Text("A01"),
@@ -127,9 +127,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     value: "A04",
                   )
                 ],
-                onChanged: (String value) {
+                onChanged: (String? value) {
                   setState(() {
-                    _value = value;
+                    _value = value.toString();
                   });
                 }),
           ),
@@ -169,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class NextPage extends StatefulWidget {
   final String value;
 
-  NextPage({Key key, this.value}) : super(key: key);
+  NextPage({Key? key, required this.value}) : super(key: key);
 
   @override
   _NextPageState createState() => new _NextPageState(value);

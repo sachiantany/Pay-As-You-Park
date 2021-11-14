@@ -26,12 +26,12 @@ class FloorPlanModel extends ChangeNotifier {
   bool _isScaled = false;
   static double _userX = 0.0;
   static double _userY = 0.3;
-  double positionX;
-  double positionY;
-  int actualX;
-  int actualY;
-  int lengthX;
-  int lengthY;
+  late double positionX;
+  late double positionY;
+  late int actualX;
+  late int actualY;
+  late int lengthX;
+  late int lengthY;
   int convertionConstantY = 730;
   int convertionConstantX = 907;
 
