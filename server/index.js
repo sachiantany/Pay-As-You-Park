@@ -7,6 +7,7 @@ import cors from 'cors';
 import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js";
 import driverRouter from "./routes/driver.js";
+import packageRouter from "./routes/package.js";
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use("/user", userRouter);
 app.use("/driver", driverRouter)
+app.use("/package", packageRouter)
 
 const CONNECTION_URL = 'mongodb+srv://admin:admin@cluster0.rubhg.mongodb.net/paypdb?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;
