@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      drawer: GuestDrawer(firstName:widget.user.firstName,lastName:widget.user.lastName,email:widget.user.userEmail),
+      drawer: GuestDrawer(user: widget.user,),
       body: Stack(alignment: Alignment.center,children: <Widget>[
         GoogleMap(
         mapToolbarEnabled: true,
@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // app bar methods:-----------------------------------------------------------
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      title: Text('Home'),
+      title: Text('Search For Park'),
       actions: _buildActions(context),
     );
   }

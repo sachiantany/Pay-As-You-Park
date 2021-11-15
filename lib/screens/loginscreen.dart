@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pay_as_you_park/screens/home.dart';
+import 'package:pay_as_you_park/screens/my_balance.dart';
+import 'package:pay_as_you_park/screens/subscription_history.dart';
 import 'package:pay_as_you_park/store/driver/diver_store.dart';
 import 'package:pay_as_you_park/utils/device/device_util.dart';
 import 'package:pay_as_you_park/utils/routes/routes.dart';
@@ -216,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomeScreen(user: _store),
+            builder: (context) => MyBalance(user: _store),
           ));
 
     });

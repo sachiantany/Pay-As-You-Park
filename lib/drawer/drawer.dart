@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:pay_as_you_park/screens/home.dart';
+import 'package:pay_as_you_park/screens/my_balance.dart';
+import 'package:pay_as_you_park/screens/packages.dart';
+import 'package:pay_as_you_park/screens/subscription_history.dart';
+import 'package:pay_as_you_park/store/driver/diver_store.dart';
 
 class GuestDrawer extends StatefulWidget {
-  final firstName;
-  final lastName;
-  final email;
 
-  const GuestDrawer({Key? key,@required this.firstName,@required this.lastName,@required this.email}) : super(key: key);
+  final DriverStore user;
+
+
+  const GuestDrawer({Key? key,required this.user}) : super(key: key);
 
   @override
   _GuestDrawerState createState() => _GuestDrawerState();
@@ -25,8 +29,8 @@ class _GuestDrawerState extends State<GuestDrawer> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('${widget.firstName} ${widget.lastName}'),
-            accountEmail: Text('${widget.email}'),
+            accountName: Text('${widget.user.firstName} ${widget.user.lastName}'),
+            accountEmail: Text('${widget.user.userEmail}'),
             currentAccountPicture: Container(
               height: 60,
               width: 60,
@@ -40,17 +44,42 @@ class _GuestDrawerState extends State<GuestDrawer> {
           ListTile(
             leading: Icon(Icons.local_parking),
             title: Text("Search Park"),
-            onTap: () => Navigator.pushReplacementNamed(context, Routers.home),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(user: widget.user),
+                )
+            ),
           ),
           ListTile(
             leading: Icon(Icons.backpack),
             title: Text("Packages"),
-            onTap: () => Navigator.pushReplacementNamed(context, Routers.home),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PackagesScreen(user: widget.user),
+                )
+            ),
           ),
           ListTile(
             leading: Icon(Icons.account_balance_wallet),
-            title: Text("Subscriptions"),
-            onTap: () => Navigator.pushReplacementNamed(context, Routers.home),
+            title: Text("My Balance"),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyBalance(user: widget.user),
+                )
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.subscriptions),
+            title: Text("Subscriptions History"),
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SubscriptionHistory(user: widget.user),
+                )
+            ),
           ),
           ListTile(
             leading: Icon(Icons.logout),
@@ -65,5 +94,6 @@ class _GuestDrawerState extends State<GuestDrawer> {
 
 class Routers {
   static const String home = HomeScreen.routeName;
+  static const String subscription = SubscriptionHistory.routeName;
 }
 
