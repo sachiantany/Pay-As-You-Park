@@ -8,18 +8,23 @@ import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js";
 import driverRouter from "./routes/driver.js";
 import packageRouter from "./routes/package.js";
+import subscriptionRouter from "./routes/subscription.js";
 
 
 const app = express();
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
+app.use(express.json())
+
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use("/user", userRouter);
 app.use("/driver", driverRouter)
 app.use("/package", packageRouter)
+app.use("/subscription", subscriptionRouter)
+
 
 const CONNECTION_URL = 'mongodb+srv://admin:admin@cluster0.rubhg.mongodb.net/paypdb?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;
