@@ -15,19 +15,26 @@ class SubscriptionService{
     }
   }
 
-  registerDriver(first_name,last_name,email, password,vehicle_registration_no,vehicle_width,vehicle_length,vehicle_heigth) async {
+  subscribe(user_email,package_name,minute, price,balance) async {
     try{
-      return await dio.post(Strings.endPoint+'driver/signup',data: {
-        "first_name" : first_name,
-        "email" : email,
-        "password" : password,
-        "last_name" : last_name,
-        "vehicle_registration_no" : vehicle_registration_no,
-        "vehicle_width" : vehicle_width,
-        "vehicle_length" : vehicle_length,
-        "vehicle_height" : vehicle_length
+      print(user_email);
+      return await dio.post(Strings.endPoint+'subscription/subscribe',data: {
+        "user_email": user_email,
+        "package_name": package_name,
+        "minute": minute,
+        "balance": balance,
+        "price": price,
       },options: Options(contentType: Headers.formUrlEncodedContentType)
-      );
+      ).then((val){
+        if(val.data['result'] != null){
+          print('success');
+        }else{
+          print('fail');
+        }
+      }).catchError((e) {
+        print('exception');
+        print(e);
+      });
     }
     on DioError catch(e){
 

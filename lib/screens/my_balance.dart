@@ -37,7 +37,7 @@ class _MyBalanceState extends State<MyBalance> {
     });
 
     //final responseData = await SubscriptionService().getSubscriptionHistory(widget.user.userEmail);
-    final responseData = await http.get(Uri.parse("https://pay-as-you-park-mobile-server.herokuapp.com/subscription/"+widget.user.userEmail));
+    final responseData = await http.get(Uri.parse("https://pay-as-you-park-mobile-server.herokuapp.com/subscription/active_subscription/"+widget.user.userEmail));
     final res_availableBalance = (await http.get(Uri.parse("https://pay-as-you-park-mobile-server.herokuapp.com/subscription/acc_bal/"+widget.user.userEmail)));
     if(responseData!=null){
       print(res_availableBalance);
@@ -100,9 +100,9 @@ class _MyBalanceState extends State<MyBalance> {
   Widget subscriptionCard(String packageName, int minutes, int price,int balance){
 
     return new Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 10.0,
-      margin: EdgeInsets.all(15.0),
+      margin: EdgeInsets.all(10.0),
 
       child: new Container(
         padding:  new EdgeInsets.all(14.0),
@@ -185,9 +185,9 @@ class _MyBalanceState extends State<MyBalance> {
 
   Card topArea() => Card(
     margin: EdgeInsets.all(10.0),
-    elevation: 1.0,
+    elevation: 10.0,
     shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(50.0))),
+        borderRadius: BorderRadius.all(Radius.circular(10.0))),
     child: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:pay_as_you_park/screens/home.dart';
 import 'package:pay_as_you_park/screens/my_balance.dart';
 import 'package:pay_as_you_park/screens/packages.dart';
+import 'package:pay_as_you_park/screens/search_park.dart';
 import 'package:pay_as_you_park/screens/subscription_history.dart';
 import 'package:pay_as_you_park/store/driver/diver_store.dart';
+import 'package:pay_as_you_park/utils/routes/routes.dart';
 
 class GuestDrawer extends StatefulWidget {
 
@@ -20,7 +22,7 @@ class GuestDrawer extends StatefulWidget {
 
 class _GuestDrawerState extends State<GuestDrawer> {
   void signOut() async {
-
+    Navigator.of(context).pushReplacementNamed(Routes.login);
   }
 
   @override
@@ -47,7 +49,7 @@ class _GuestDrawerState extends State<GuestDrawer> {
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(user: widget.user),
+                  builder: (context) => SearchParkScreen(user: widget.user),
                 )
             ),
           ),

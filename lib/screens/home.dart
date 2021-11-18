@@ -1,3 +1,4 @@
+import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -46,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool marker_active = false;
   bool destination_active = false;
   bool destination_search = false;
+  bool destination_reached = false;
 
   static final CameraPosition initialLocation = CameraPosition(
     target: LatLng(6.0535, 80.2210),
@@ -159,6 +161,12 @@ class _HomeScreenState extends State<HomeScreen> {
       final directions = await DirectionsRepository()
           .getDirections(origin: marker.position, destination: latlng);
       setState(() => _info = directions!);
+
+      if(marker.position == latlng){
+        //end trip
+        destination_active = false;
+        destination_reached = true;
+      }
 
       destination_active = true;
       destination_search = false;
@@ -300,6 +308,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return <Widget>[
       _buildLogoutButton(),
     ];
+  }
+
+  Widget dragableBottomSheet(BuildContext context){
+    return DraggableBottomSheet(
+        backgroundWidget: Scaffold(
+          backgroundColor: Colors.white,
+
+        )
+    );
   }
 
   Widget _buildLogoutButton() {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -12,7 +13,7 @@ import 'package:pay_as_you_park/store/driver/diver_store.dart';
 import 'package:pay_as_you_park/utils/routes/routes.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-
+import 'package:confirm_dialog/confirm_dialog.dart';
 
 
 class PackagesScreen extends StatefulWidget {
@@ -82,8 +83,19 @@ class _PackagesScreenState extends State<PackagesScreen> {
                       final nDataList = listModel[i];
                       return Container(
                           child: InkWell(
-                              onTap: (){
-
+                              onTap: () async {
+                                  if(await confirm(
+                                    context,
+                                    title: Text("Confirm subscription"),
+                                    content: Text("Confirm whether to active package"),
+                                    textOK: Text("Confirm"),
+                                    textCancel: Text("Cancel")
+                                  )){
+                                    await SubscriptionService().subscribe(widget.user.userEmail, nDataList.name, nDataList.minutes+nDataList.bonus, nDataList.price, nDataList.minutes+nDataList.bonus);
+                                    _showSuccessMessage("Package Activated");
+                                    return;
+                                  }
+                                  return print('cancel');
                               },
                               child: subscriptionCard(nDataList.name,nDataList.minutes,nDataList.price,nDataList.bonus)
                           )
@@ -158,7 +170,7 @@ class _PackagesScreenState extends State<PackagesScreen> {
   // app bar methods:-----------------------------------------------------------
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      title: Text('Subscription History'),
+      title: Text('Packages'),
       actions: _buildActions(context),
     );
   }
@@ -178,5 +190,22 @@ class _PackagesScreenState extends State<PackagesScreen> {
         Icons.power_settings_new,
       ),
     );
+  }
+
+  _showSuccessMessage(String message) {
+    if (message.isNotEmpty) {
+      Future.delayed(Duration(milliseconds: 0), () {
+        if (message.isNotEmpty) {
+          FlushbarHelper.createSuccess(
+            message: message,
+            title: message,
+            duration: Duration(seconds: 3),
+          )
+            ..show(context);
+        }
+      });
+    }
+
+    return SizedBox.shrink();
   }
 }

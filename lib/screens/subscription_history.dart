@@ -96,9 +96,9 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
   Widget subscriptionCard(String packageName, int minutes, int price,int balance){
 
     return new Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 10.0,
-      margin: EdgeInsets.all(15.0),
+      margin: EdgeInsets.all(5.0),
 
       child: new Container(
         padding:  new EdgeInsets.all(14.0),

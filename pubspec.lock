@@ -155,6 +155,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  confirm_dialog:
+    dependency: "direct main"
+    description:
+      name: confirm_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   convert:
     dependency: transitive
     description:
@@ -190,6 +197,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  draggable_bottom_sheet:
+    dependency: "direct main"
+    description:
+      name: draggable_bottom_sheet
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   fake_async:
     dependency: transitive
     description:
