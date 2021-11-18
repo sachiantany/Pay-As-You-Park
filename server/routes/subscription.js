@@ -1,10 +1,11 @@
 import express from 'express';
 
-import { getSubscriptionByUser,getSubscriptionBalanceByUser, subscribePackage } from '../controllers/subscription.js';
+import { getSubscriptionByUser,getSubscriptionBalanceByUser, subscribePackage, getActiveSubscriptionByUser } from '../controllers/subscription.js';
 
 const router = express.Router();
 
 router.get('/:id', getSubscriptionByUser);
+router.get('/active_subscription/:id', getActiveSubscriptionByUser);
 router.get('/acc_bal/:id', getSubscriptionBalanceByUser);
 router.post('/subscribe',subscribePackage);
 

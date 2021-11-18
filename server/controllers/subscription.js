@@ -16,6 +16,17 @@ export const getSubscriptionByUser = async (req, res) => {
     }
 }
 
+export const getActiveSubscriptionByUser = async (req, res) => { 
+    const { id } = req.params.id;
+    try {
+        const subscription = await Subscription.find({ "user_email": req.params['id'], "balance":{$gt:0}});
+                
+        res.status(200).json(subscription);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const getSubscriptionBalanceByUser = async (req, res) => { 
     const { id } = req.params.id;
     console.log(req.params['id']);
