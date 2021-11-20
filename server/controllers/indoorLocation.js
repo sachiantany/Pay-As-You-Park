@@ -27,7 +27,7 @@ export const getIndoorLocation = async (req, res) => {
     }
 }
 
-export const giveLocation = async (req, res) => {
+export const createLocation = async (req, res) => {
     const location = req.body;
 
     const newLocation = new IndoorLocation({ ...location })
@@ -40,5 +40,6 @@ export const giveLocation = async (req, res) => {
         res.status(409).json({ message: error.message });
     }
 }
+
 
 export default router;

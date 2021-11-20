@@ -7,6 +7,9 @@ import postRoutes from './routes/posts.js';
 import userRouter from "./routes/user.js";
 import driverRouter from "./routes/driver.js";
 import indoorRouter from "./routes/indoorLocation.js";
+import slotsRouter from "./routes/slotsDetails.js";
+import parkingdRouter from "./routes/parkedDetails.js";
+
 
 
 const app = express();
@@ -19,6 +22,9 @@ app.use('/posts', postRoutes);
 app.use("/user", userRouter);
 app.use("/driver", driverRouter);
 app.use("/indoor", indoorRouter);
+app.use("/slot", slotsRouter);
+app.use("/parked", parkingdRouter);
+
 
 const CONNECTION_URL = 'mongodb+srv://admin:admin@cluster0.rubhg.mongodb.net/paypdb?retryWrites=true&w=majority';
 // const CONNECTION_URL = 'mongodb+srv://Lahiru:<password>@fluttercluster.ci8uy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';

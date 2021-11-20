@@ -1,11 +1,11 @@
 import express from "express";
 const router = express.Router();
-
-import { getIndoorLocations, giveLocation, getIndoorLocation } from "../controllers/indoorLocation.js";
+import auth from "../middleware/auth.js";
+import { getIndoorLocations, getIndoorLocation, createLocation } from "../controllers/indoorLocation.js";
 
 router.get("/", getIndoorLocations);
-router.get("/:id", getIndoorLocation);
-router.post("/", giveLocation);
+router.get("/:id", auth,getIndoorLocation);
+router.post("/", createLocation);
 
 
 export default router;
