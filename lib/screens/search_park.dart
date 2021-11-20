@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pay_as_you_park/constants/colors.dart';
 import 'package:pay_as_you_park/drawer/drawer.dart';
 import 'package:pay_as_you_park/model/directions_model.dart';
+import 'package:pay_as_you_park/screens/indoor_home.dart';
 import 'package:pay_as_you_park/services/directions_repository.dart';
 import 'package:pay_as_you_park/services/suggestion_yard_service.dart';
 import 'package:pay_as_you_park/store/driver/diver_store.dart';
@@ -21,9 +22,7 @@ import 'package:pay_as_you_park/widgets/rounded_button_widget.dart';
 
 import 'my_balance.dart';
 
-
 class SearchParkScreen extends StatefulWidget {
-
   final DriverStore user;
 
   static const String routeName = '/Home';
@@ -34,7 +33,6 @@ class SearchParkScreen extends StatefulWidget {
 }
 
 class _SearchParkScreenState extends State<SearchParkScreen> {
-
   late StreamSubscription _locationSubscription;
   Location _locationTracker = Location();
   late Marker marker;
@@ -47,8 +45,6 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
   late Directions _info;
   late SuggestionStore _suggestionStore = SuggestionStore();
 
-
-
   bool marker_active = false;
   bool destination_active = false;
   bool destination_search = false;
@@ -59,14 +55,15 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
     zoom: 14.4746,
   );
 
-
   Future<Uint8List> getMarker() async {
-    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/icons/car_icon.png");
+    ByteData byteData =
+        await DefaultAssetBundle.of(context).load("assets/icons/car_icon.png");
     return byteData.buffer.asUint8List();
   }
 
   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
-    LatLng latlng = LatLng(newLocalData.latitude!.toDouble(), newLocalData.longitude!.toDouble());
+    LatLng latlng = LatLng(
+        newLocalData.latitude!.toDouble(), newLocalData.longitude!.toDouble());
     this.setState(() {
       marker = Marker(
           markerId: MarkerId("home"),
@@ -100,20 +97,22 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
         _locationSubscription.cancel();
       }*/
 
-      _locationSubscription = _locationTracker.onLocationChanged.listen((newLocalData) {
+      _locationSubscription =
+          _locationTracker.onLocationChanged.listen((newLocalData) {
         if (_controller != null) {
-          _controller.animateCamera(CameraUpdate.newCameraPosition(new CameraPosition(
-              bearing: 192.8334901395799,
-              target: LatLng(newLocalData.latitude!.toDouble(), newLocalData.longitude!.toDouble()),
-              tilt: 0,
-              zoom: 18.00)));
+          _controller.animateCamera(CameraUpdate.newCameraPosition(
+              new CameraPosition(
+                  bearing: 192.8334901395799,
+                  target: LatLng(newLocalData.latitude!.toDouble(),
+                      newLocalData.longitude!.toDouble()),
+                  tilt: 0,
+                  zoom: 18.00)));
           updateMarkerAndCircle(newLocalData, imageData);
-          if(destination_active != false){
+          if (destination_active != false) {
             updateDirections();
           }
         }
       });
-
     } on PlatformException catch (e) {
       if (e.code == 'PERMISSION_DENIED') {
         debugPrint("Permission Denied");
@@ -126,7 +125,6 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
     if (_locationSubscription != null) {
       _locationSubscription.cancel();
       _controller.dispose();
-
     }
     super.dispose();
   }
@@ -138,20 +136,23 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
     int width = int.parse(widget.user.vehicleWidth);
     int height = int.parse(widget.user.vehicleHeight);
 
-
-    final suggestions = await _suggestionStore.GetYardSuggestion(marker.position.latitude, marker.position.longitude, length, width, height);
+    final suggestions = await _suggestionStore.GetYardSuggestion(
+        marker.position.latitude,
+        marker.position.longitude,
+        length,
+        width,
+        height);
     //setState(() => _suggestionStore = suggestions!);
-    if(_suggestionStore.success == true){
-
+    if (_suggestionStore.success == true) {
       destinationLat = double.parse(_suggestionStore.latitude);
       destinationLon = double.parse(_suggestionStore.longitude);
       parkingYardId = _suggestionStore.yard_id;
-    }else{
+    } else {
       //error
       print('error in predict');
     }
-    if(_suggestionStore.success){
-      LatLng latlng = LatLng(destinationLat,destinationLon);
+    if (_suggestionStore.success) {
+      LatLng latlng = LatLng(destinationLat, destinationLon);
       this.setState(() {
         _destination = Marker(
             markerId: MarkerId("destination"),
@@ -160,14 +161,15 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
             zIndex: 2,
             flat: true,
             anchor: Offset(0.5, 0.5),
-            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue));
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueBlue));
       });
 
       final directions = await DirectionsRepository()
           .getDirections(origin: marker.position, destination: latlng);
       setState(() => _info = directions!);
 
-      if(marker.position == latlng){
+      if (marker.position == latlng) {
         //end trip
         destination_active = false;
         destination_reached = true;
@@ -176,7 +178,6 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
       destination_active = true;
       destination_search = false;
     }
-
   }
 
   updateDirections() async {
@@ -216,11 +217,13 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      drawer: GuestDrawer(user: widget.user,),
+      drawer: GuestDrawer(
+        user: widget.user,
+      ),
       body: DraggableBottomSheet(
         backgroundWidget: Scaffold(
           body: Container(
-            child: Stack(alignment: Alignment.center,children: <Widget>[
+            child: Stack(alignment: Alignment.center, children: <Widget>[
               GoogleMap(
                 mapToolbarEnabled: true,
                 mapType: MapType.normal,
@@ -306,27 +309,35 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
           padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))
-          ),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20))),
           child: Column(
             children: [
               Container(
                 width: 40,
                 height: 6,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
                 ),
               ),
-              SizedBox(height: 8,),
-              Text('Search for park', style: TextStyle(color: AppColors.orange[500], fontSize: 16, fontWeight: FontWeight.bold),),
-              SizedBox(height: 8,),
-
-              if(destination_search == false && destination_active == false)
-              Row(
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                'Search for park',
+                style: TextStyle(
+                    color: AppColors.orange[500],
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              if (destination_search == false && destination_active == false)
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
                     RoundedButtonWidget(
                       buttonText: 'Locate Me',
                       buttonColor: Colors.orangeAccent,
@@ -344,29 +355,28 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
                       },
                     ),
                   ],
-              ),
-              if(destination_active == true)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RoundedButtonWidget(
-                    buttonText: 'Cancel',
-                    buttonColor: Colors.red,
-                    textColor: Colors.white,
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SearchParkScreen(user: widget.user),
-                          )
-                      );
-                    },
-                  ),
-                ],
-              ),
-
-              if(destination_reached == true)
-              Row(
+                ),
+              if (destination_active == true)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButtonWidget(
+                      buttonText: 'Cancel',
+                      buttonColor: Colors.red,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SearchParkScreen(user: widget.user),
+                            ));
+                      },
+                    ),
+                  ],
+                ),
+              if (destination_reached == false)
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RoundedButtonWidget(
@@ -377,9 +387,9 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SearchParkScreen(user: widget.user),//lahiru's screen
-                            )
-                        );
+                              builder: (context) => MyHomePage(
+                                  user: widget.user), //lahiru's screen
+                            ));
                       },
                     ),
                   ],
@@ -407,8 +417,6 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
     ];
   }
 
-
-
   Widget _buildLogoutButton() {
     return IconButton(
       onPressed: () {
@@ -422,14 +430,11 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
 
   Widget navigate(BuildContext context) {
     Future.delayed(Duration(milliseconds: 0), () {
-
-
       Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MyBalance(user: widget.user),
           ));
-
     });
 
     return Container();
@@ -443,13 +448,11 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
             message: message,
             title: 'Something went wrong',
             duration: Duration(seconds: 3),
-          )
-            ..show(context);
+          )..show(context);
         }
       });
     }
 
     return SizedBox.shrink();
   }
-
 }
