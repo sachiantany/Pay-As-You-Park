@@ -39,7 +39,17 @@ export default makeStyles({
   details: {
     display: 'flex',
     justifyContent: 'space-between',
-    margin: '20px',
+    margin: '20px 10px 0px 20px',
+  },
+  details1: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0px 0px 0px 15px'
+  },
+  details2: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '0px 0px 0px 20px'
   },
   title: {
     padding: '0 16px',
