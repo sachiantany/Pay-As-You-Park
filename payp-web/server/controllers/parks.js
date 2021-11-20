@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import sid from 'shortid';
 
 import carPark from '../models/carPark.js';
 
@@ -30,7 +31,7 @@ export const getPark = async (req, res) => {
 export const createPark = async (req, res) => {
     const park = req.body;
 
-    const newcarParks = new carPark({ ...park, creator: req.userId, createdAt: new Date().toISOString(), NextEvaluationDate:new Date().toISOString(), Status: 'Pending' })
+    const newcarParks = new carPark({ ...park,PID: sid(), creator: req.userId, createdAt: new Date().toISOString(), NextEvaluationDate:new Date().toISOString(), Status: 'Pending' })
 
     try {
         await newcarParks.save();
