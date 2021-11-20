@@ -6,11 +6,11 @@ const router = express.Router();
 import auth from "../middleware/auth.js";
 
 router.get('/', getParkingAreas);
-router.get('/:id', getParkingArea);
+router.get('/single/:id', getParkingArea);
 router.post('/create/',auth,  createParkingArea);
 router.patch('/update/:id', auth, updateParkingArea);
 router.delete('/:id', auth, deleteParkingArea);
-router.get('/user/', auth, getParkingAreaByUserId);
+router.get('/getByUser/', auth, getParkingAreaByUserId);
 router.patch('/occupancy/:id', updateParkingAreaSlots);
 
 export default router;

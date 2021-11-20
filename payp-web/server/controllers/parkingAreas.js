@@ -16,6 +16,7 @@ export const getParkingAreas = async (req, res) => {
 };
 
 export const getParkingArea = async (req, res) => {
+    console.log('Get Parking Area');
     const {id} = req.params;
 
     try {
@@ -69,9 +70,12 @@ export const deleteParkingArea = async (req, res) => {
 
 
 export const getParkingAreaByUserId = async (req, res) => {
+    console.log('Get Parking Area By User ID');
 
+
+    console.log(`User if from postman ${req.userId}`);
+try{
     const {id} = req.userId;
-
     ParkingArea.find(id)
         .then(parkingArea => {
             if (!parkingArea) {
@@ -90,6 +94,10 @@ export const getParkingAreaByUserId = async (req, res) => {
             message: "Server Error"
         });
     });
+}catch (e) {
+    console.log(e.message);
+}
+
 };
 
 export const updateParkingAreaSlots = async (req, res) => {
