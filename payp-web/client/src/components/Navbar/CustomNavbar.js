@@ -5,6 +5,7 @@ import GuestNavbar from './GuestNavbar';
 import AdminSidebar from './AdminSidebar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./customnavbar.css"
+import AvailableYards from '../Availability/AvailableYards';
 
 
 const CustomNavbar = () => {
@@ -21,7 +22,11 @@ const CustomNavbar = () => {
                     <AdminNavbar/> 
                         <div className="container">
                         <AdminSidebar/>
-                        <AdminHome/>
+                            <Switch>
+                                <Route path="/admin-home" exact component={AdminHome} />
+                                <Route path="/available" exact component={AvailableYards} />
+                            </Switch>
+                        {/* <AdminHome/> */}
                         </div>
                 </div>
                 

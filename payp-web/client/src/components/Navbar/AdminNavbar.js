@@ -4,6 +4,7 @@ import { AppBar, Typography, Toolbar, Avatar, Button } from '@material-ui/core';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import AvailableYards from '../Availability/AvailableYards';
 
 import * as actionType from '../../constants/actionTypes';
 import useStyles from './styles';
@@ -79,7 +80,7 @@ const AdminNavbar = () => {
                         </li>
                     
                         <li className="nav-item">
-                            <a href="#" className="nav-link">Availability</a>
+                            <a href="/available" className="nav-link">Availability</a>
                         </li>
                         <li className="nav-item">
                             <a href="#" className="nav-link">About</a>

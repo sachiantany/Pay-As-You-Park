@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Paper } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Input } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import FileBase from 'react-file-base64';
 import { getParks } from '../../actions/parks';
 
 
@@ -175,6 +174,8 @@ const Form = ({ currentId, setCurrentId }) => {
 
         <TextField name="Capacity" variant="outlined" label="Capacity" fullWidth value={parkData.Capacity} onChange={(e) => setParkData({ ...parkData, Capacity: e.target.value })} required/>
         {/* <div className={classes.fileInput}><FileBase type="file" multiple={false} onDone={({ base64 }) => setParkData({ ...parkData, Image1: base64 })} /></div> */}
+        <Typography variant="h7"> Please Upload Parking Yard Images in Different View</Typography>
+
         <input className={classes.fileInput} type="file" onChange={(event)=> {setParkData({ ...parkData, Image1: event.target.files[0] })}} required/>
         <input className={classes.fileInput} type="file" onChange={(event)=> {setParkData({ ...parkData, Image2: event.target.files[0] })}} required/>
         <input className={classes.fileInput} type="file" onChange={(event)=> {setParkData({ ...parkData, Image3: event.target.files[0] })}} required/>

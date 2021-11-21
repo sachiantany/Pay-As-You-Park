@@ -43,7 +43,7 @@ const AdminSidebar = () => {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-          <Link to="/products" className="link">
+          <Link to="/available" className="link">
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Yards

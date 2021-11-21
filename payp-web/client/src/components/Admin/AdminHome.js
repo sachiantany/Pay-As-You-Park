@@ -21,7 +21,7 @@ const AdminHome = () => {
 
     return (
         // <div className="home">
-            <Grow in>
+            // <Grow in>
             <Container>
                 <Grid container justifyContent="space-between" spacing={3}>
                 <Grid item xs={12} sm={6}>
@@ -32,7 +32,7 @@ const AdminHome = () => {
                 </Grid>
                 </Grid>
             </Container>
-            </Grow>
+            // </Grow>
     //   </div>
     );
   }
