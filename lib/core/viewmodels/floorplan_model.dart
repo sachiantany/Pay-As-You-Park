@@ -40,7 +40,6 @@ class FloorPlanModel extends ChangeNotifier {
   late int lengthY;
   int convertionConstantY = 730;
   int convertionConstantX = 907;
-  bool destination_slot_reached = false;
 
   static double get userX => _userX;
   static double get userY => _userY;
@@ -175,11 +174,19 @@ class FloorPlanModel extends ChangeNotifier {
   void reset() async {
     const List<int> userLocationY = [
       0,
-      50,
-      60,
-      70,
-      100,
-      150, //to A04>
+      21,
+      36,
+      57,
+      96,
+      101,
+      135,
+      155,
+      162,
+      170,
+      182,
+      194,
+      201,
+      211, //to A04>
       220,
       240,
       290,
@@ -190,13 +197,39 @@ class FloorPlanModel extends ChangeNotifier {
       420,
       439 //to A01
     ];
+
+    const List<int> userLocationA4Y = [
+      0,
+      20,
+      30,
+      50,
+      90,
+      100,
+      130,
+      150,
+      165,
+      173,
+      185,
+      197,
+      206,
+      215, //to A04>
+      220,
+      230,
+      237,
+      249,
+      290,
+      300,
+      320,
+      346, //to A01
+    ];
     // int userActualPositionX = 137;
 
     int userValidationPositionX = 274;
     int userActualPositionX = 137;
 
     int userValidationPositionY = 438;
-    int userActualPositionY = userLocationY[i];
+    int userActualPositionY = userLocationA4Y[i]; //############### A04
+    // int userActualPositionY = userLocationY[i]; //############### A01
 
     if (userValidationPositionY <= userActualPositionY) {
       userValidationPositionY = 438;
@@ -220,8 +253,10 @@ class FloorPlanModel extends ChangeNotifier {
     _isScaled = false;
     _userX = userImagePositionX;
     _userY = userImagePositionY;
-    int length = userLocationY.length;
-    if (i == length - 1) {
+    int lengthA01 = userLocationY.length;
+    int lengthA04 = userLocationA4Y.length;
+    // if (i == lengthA01 - 1) {
+    if (i == lengthA04 - 1) {
       double maxPosX = getPositionX(274, 100);
       _location = getUserLocation(maxPosX, _userY)
           .map((item) => Location.fromMap(item))

@@ -19,6 +19,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:pay_as_you_park/widgets/progress_indicator_widget.dart';
 import 'package:pay_as_you_park/widgets/rounded_button_widget.dart';
+import 'package:app_settings/app_settings.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'my_balance.dart';
 
@@ -213,6 +215,14 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
     }
   }
 
+  checkBluetoothPermission() async {
+    var bluetoothStatus = await Permission.bluetooth.status;
+
+    if (!bluetoothStatus.isGranted) {
+      await Permission.bluetooth.request();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -334,28 +344,28 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
               SizedBox(
                 height: 8,
               ),
-              if (destination_search == false && destination_active == false)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RoundedButtonWidget(
-                      buttonText: 'Locate Me',
-                      buttonColor: Colors.orangeAccent,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        getCurrentLocation();
-                      },
-                    ),
-                    RoundedButtonWidget(
-                      buttonText: 'Search Park',
-                      buttonColor: Colors.orangeAccent,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        getDestination();
-                      },
-                    ),
-                  ],
-                ),
+              // if (destination_search == false && destination_active == false)
+              //   Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       RoundedButtonWidget(
+              //         buttonText: 'Locate Me',
+              //         buttonColor: Colors.orangeAccent,
+              //         textColor: Colors.white,
+              //         onPressed: () {
+              //           getCurrentLocation();
+              //         },
+              //       ),
+              //       RoundedButtonWidget(
+              //         buttonText: 'Search Park',
+              //         buttonColor: Colors.orangeAccent,
+              //         textColor: Colors.white,
+              //         onPressed: () {
+              //           getDestination();
+              //         },
+              //       ),
+              //     ],
+              //   ),
               if (destination_active == true)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -384,6 +394,7 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
                       buttonColor: Colors.blueAccent,
                       textColor: Colors.white,
                       onPressed: () {
+                        AppSettings.openBluetoothSettings();
                         Navigator.push(
                             context,
                             MaterialPageRoute(

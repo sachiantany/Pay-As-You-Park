@@ -167,8 +167,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text("Submit".toUpperCase(),
                         style: TextStyle(fontSize: 14)),
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.blue, //background color of button
-                        side: BorderSide(width: 3, color: Color(0xff02011c)),
+                        primary:
+                            Colors.orangeAccent, //background color of button
+                        side: BorderSide(width: 3, color: Colors.white),
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                             //to set border radius to button
