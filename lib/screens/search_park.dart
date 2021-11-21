@@ -172,11 +172,7 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
       destination_active = true;
       destination_search = false;
 
-      if (_info.distanceInt < 10) {
-        //end trip
-        destination_active = false;
-        destination_reached = true;
-      }
+
     }
   }
 
@@ -210,6 +206,17 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
 
       destination_active = true;
       destination_search = false;
+      //end trip
+      print('--------------------------------value-----------------------------------------');
+      print(_info.distanceInt);
+
+      if (_info.distanceInt < 10) {
+        //end trip
+        print('-------------------------------------------------------------------------');
+        print(_info.distanceInt);
+        destination_active = false;
+        destination_reached = true;
+      }
     }
   }
 
@@ -315,14 +322,14 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
             children: [
               Container(
                 width: 40,
-                height: 6,
+                height: 5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 4,
               ),
               Text(
                 'Search for park',
@@ -398,8 +405,8 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
             ],
           ),
         ),
-        minExtent: 150,
-        maxExtent: 150,
+        minExtent: 170,
+        maxExtent: 170,
       ),
     );
   }
