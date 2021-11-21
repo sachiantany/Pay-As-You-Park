@@ -344,28 +344,28 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
               SizedBox(
                 height: 8,
               ),
-              // if (destination_search == false && destination_active == false)
-              //   Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       RoundedButtonWidget(
-              //         buttonText: 'Locate Me',
-              //         buttonColor: Colors.orangeAccent,
-              //         textColor: Colors.white,
-              //         onPressed: () {
-              //           getCurrentLocation();
-              //         },
-              //       ),
-              //       RoundedButtonWidget(
-              //         buttonText: 'Search Park',
-              //         buttonColor: Colors.orangeAccent,
-              //         textColor: Colors.white,
-              //         onPressed: () {
-              //           getDestination();
-              //         },
-              //       ),
-              //     ],
-              //   ),
+              if (destination_search == false && destination_active == false)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RoundedButtonWidget(
+                      buttonText: 'Locate Me',
+                      buttonColor: Colors.orangeAccent,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        getCurrentLocation();
+                      },
+                    ),
+                    RoundedButtonWidget(
+                      buttonText: 'Search Park',
+                      buttonColor: Colors.orangeAccent,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        getDestination();
+                      },
+                    ),
+                  ],
+                ),
               if (destination_active == true)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -385,7 +385,7 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
                     ),
                   ],
                 ),
-              if (destination_reached == false)
+              if (destination_reached == true)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
