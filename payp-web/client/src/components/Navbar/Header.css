@@ -59,9 +59,10 @@ header{
     opacity: .7;
 }
 .nav-link-apple{
-    width: 1.6rem;
-    height: 4.4rem;
-    background: url("../../images/icon.svg") center no-repeat;
+    width: 40px;
+    height: 40px;
+    /* background-color: white; */
+    background-color: #3c3c3d;
 }
 .nav-link-search{
     width: 1.6rem;

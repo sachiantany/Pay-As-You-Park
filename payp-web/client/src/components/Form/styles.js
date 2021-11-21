@@ -22,4 +22,10 @@ export default makeStyles((theme) => ({
   buttonSubmit: {
     marginBottom: 10,
   },
+  mapBox: {
+    marginLeft: "5px",
+    marginBottom: "200px",
+    width: "600px",
+    height: "600px"
+  }
 }));
