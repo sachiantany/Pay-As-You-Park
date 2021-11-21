@@ -169,14 +169,14 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
           .getDirections(origin: marker.position, destination: latlng);
       setState(() => _info = directions!);
 
-      if (marker.position == latlng) {
+      destination_active = true;
+      destination_search = false;
+
+      if (_info.distanceInt < 10) {
         //end trip
         destination_active = false;
         destination_reached = true;
       }
-
-      destination_active = true;
-      destination_search = false;
     }
   }
 
@@ -346,6 +346,7 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
                         getCurrentLocation();
                       },
                     ),
+                    SizedBox(width: 5),
                     RoundedButtonWidget(
                       buttonText: 'Search Park',
                       buttonColor: Colors.orangeAccent,
@@ -375,7 +376,7 @@ class _SearchParkScreenState extends State<SearchParkScreen> {
                     ),
                   ],
                 ),
-              if (destination_reached == false)
+              if (destination_reached == true)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

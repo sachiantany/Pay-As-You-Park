@@ -7,12 +7,14 @@ class Directions {
   final List<PointLatLng> polylinePoints;
   final String totalDistance;
   final String totalDuration;
+  final int distanceInt;
 
   const Directions({
     required this.bounds,
     required this.polylinePoints,
     required this.totalDistance,
     required this.totalDuration,
+    required this.distanceInt
   });
 
   factory Directions.fromMap(Map<String, dynamic> map) {
@@ -33,10 +35,12 @@ class Directions {
     // Distance & Duration
     String distance = '';
     String duration = '';
+    int distanceValue = 0;
     if ((data['legs'] as List).isNotEmpty) {
       final leg = data['legs'][0];
       distance = leg['distance']['text'];
       duration = leg['duration']['text'];
+      distanceValue = leg['distance']['value'];
     }
 
     return Directions(
@@ -45,6 +49,7 @@ class Directions {
       PolylinePoints().decodePolyline(data['overview_polyline']['points']),
       totalDistance: distance,
       totalDuration: duration,
+      distanceInt: distanceValue
     );
   }
 }
