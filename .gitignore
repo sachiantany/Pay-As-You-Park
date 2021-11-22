@@ -1,0 +1,8 @@
+#Files not to be added
+FinalCodeSVM
+
+
+Resnet50FeatureExtractor.mat
+TestFeatures.mat
+TrainedDetectorResnet50.mat
+trainingMatrix.mat
