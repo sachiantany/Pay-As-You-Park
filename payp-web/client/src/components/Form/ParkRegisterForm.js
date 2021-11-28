@@ -57,7 +57,7 @@ const Form = ({ currentId, setCurrentId }) => {
     height: "100vh",
     latitude: 6.867327205086767,
     longitude: 79.89684721698309,
-    zoom: 8,
+    zoom: 4,
   });
 
   const geolocateControlStyle= {
@@ -127,10 +127,10 @@ const Form = ({ currentId, setCurrentId }) => {
                 const quality = response1.data['quality']
 
                 if (currentId === 0) {
-                  dispatch(createPark({ ...parkData, Latitude: newPlace.lat, Longitude: newPlace.long,QualityArray: quality,Image1 : response.data.url, name: user?.result?.name }));
+                  dispatch(createPark({ ...parkData, Latitude: newPlace.lat, Longitude: newPlace.long,QualityArray: quality,Image1 : response.data.url, Image2 : response.data.url,Image3 : response.data.url, name: user?.result?.name }));
                   clear();
                 } else {
-                  dispatch(updatePark(currentId, { ...parkData, Latitude: newPlace.lat, Longitude: newPlace.long, QualityArray: quality,Image1 : response.data.url, name: user?.result?.name }));
+                  dispatch(updatePark(currentId, { ...parkData, Latitude: newPlace.lat, Longitude: newPlace.long, QualityArray: quality,Image1 : response.data.url, Image2 : response.data.url,Image3 : response.data.url, name: user?.result?.name }));
                   clear();
                 }
               }
@@ -160,6 +160,8 @@ const Form = ({ currentId, setCurrentId }) => {
       long: longitude,
     });
   };
+
+  
 
   return (
     <Paper className={classes.paper}>

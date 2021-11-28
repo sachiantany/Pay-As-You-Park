@@ -100,7 +100,7 @@ const Post = ({ post, setCurrentId }) => {
             ? <Button size="small" color="primary" style={{background:"#51A02F"}}> Approved</Button>
             : [
                 post.QualityArray=="Average"
-              ? <Button size="small" color="primary" style={{background:"#F4E200"}}> Pending</Button>
+              ? <Button size="small" color="primary" style={{background:"#F4E200"}}> Approved</Button>
               : [
                 post.QualityArray=="Bad"
                 ? <Button size="small" color="primary" style={{background:"#DA2D08"}}> Rejected</Button>
